@@ -1,0 +1,647 @@
+/* ===========================
+   PRODUCT DETAIL PAGE - Professional CSS
+   Matches Premiro Design System
+   =========================== */
+
+/* CSS Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Color Palette - Matching Premiro */
+  --primary-color: #00a86b;
+  --primary-dark: #008556;
+  --primary-light: #33bb87;
+  --secondary-color: #1a1a2e;
+  --accent-color: #ff6b35;
+  --text-dark: #2d3436;
+  --text-light: #636e72;
+  --bg-light: #f8f9fa;
+  --white: #ffffff;
+  --border-color: #e1e8ed;
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.2);
+  
+  /* Transitions */
+  --transition: 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  padding: var(--spacing-md);
+}
+
+/* ===========================
+   PRODUCT CONTAINER
+   =========================== */
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--spacing-xl) var(--spacing-md);
+  min-height: 100vh;
+}
+
+.product-container {
+  max-width: 600px;
+  width: 100%;
+  background: var(--white);
+  padding: 0;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===========================
+   PRODUCT HEADER
+   =========================== */
+
+h2#name {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-sm);
+  margin-top: 0;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  padding: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  padding-top: calc(var(--spacing-lg) + var(--spacing-md));
+  order: 1;
+}
+
+h2#name::after {
+  display: none;
+}
+
+h3#price {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0 var(--spacing-md);
+  order: 2;
+}
+
+h3#price::before {
+  content: '💰';
+  font-size: 1.5rem;
+}
+
+/* ===========================
+   PRODUCT IMAGES
+   =========================== */
+
+.product-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+  transition: all var(--transition);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  order: -2;
+  background-color: var(--bg-light);
+  padding: var(--spacing-md);
+}
+
+.product-img:hover {
+  transform: scale(1.03);
+}
+
+#img1 {
+  display: block;
+}
+
+#img2 {
+  display: none;
+}
+
+/* ===========================
+   IMAGE SWITCHER
+   =========================== */
+
+div[style*="margin-top:10px"]:first-of-type {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: var(--spacing-md);
+  background: var(--bg-light);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  order: -1;
+}
+
+a.img {
+  color: var(--primary-color);
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  background-color: var(--white);
+  border: 2px solid var(--primary-color);
+  transition: all var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+a.img:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Remove the separator bar */
+div[style*="margin-top:10px"]:first-of-type {
+  font-size: 0;
+}
+
+/* ===========================
+   PRODUCT NAVIGATION BUTTONS
+   =========================== */
+
+div[style*="margin-top:10px"]:last-of-type {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
+  margin-top: 0 !important;
+  margin-bottom: var(--spacing-md);
+  order: 0;
+  padding-top: var(--spacing-md);
+  background-color: var(--white);
+}
+
+.switcher {
+  flex: 1;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.switcher:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.switcher:active {
+  transform: translateY(0);
+}
+
+.switcher:first-child {
+  background-color: var(--text-light);
+}
+
+.switcher:first-child:hover {
+  background-color: var(--primary-dark);
+}
+
+/* ===========================
+   PRODUCT DESCRIPTION
+   =========================== */
+
+p[style*="margin-top:15px"] {
+  background-color: var(--white);
+  padding: var(--spacing-md) !important;
+  border-left: 4px solid var(--primary-color);
+  border-radius: 0;
+  color: var(--text-dark) !important;
+  font-size: 1rem !important;
+  line-height: 1.8 !important;
+  margin-top: 0 !important;
+  margin-bottom: var(--spacing-md) !important;
+  box-shadow: none;
+  border-top: 1px solid var(--border-color);
+  order: 3;
+}
+
+/* ===========================
+   ACTION BUTTONS
+   =========================== */
+
+#buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: 0;
+  margin-bottom: 0;
+  flex-wrap: wrap;
+  padding: var(--spacing-md);
+  padding-top: 0;
+  padding-bottom: var(--spacing-lg);
+  order: 4;
+}
+
+.add-tocart {
+  flex: 1;
+  min-width: 200px;
+  color: var(--white);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  background-color: green;
+}
+
+.add-tocart::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.add-tocart:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.add-tocart:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.add-tocart:active {
+  transform: translateY(-1px);
+}
+
+#addCartBtn::after {
+  content: ' 🛒';
+}
+ 
+/* Buy Now Button */ .buy-now{
+background-color: orange;
+}
+.btn-buy-now {
+background-color: orange;
+}
+
+#buyNowBtn::after {
+  content: ' 🏃';
+}
+
+.btn-buy-now:hover {
+  box-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+}
+
+/* Pre-order button styling */
+#preorderBtn {
+background-color: var(--accent-color);
+  min-width: 100%;
+}
+
+#preorderBtn::after {
+  content: ' 🔔';
+}
+
+#preorderBtn:hover {
+  box-shadow: 0 0 30px rgba(99, 110, 114, 0.4);
+}
+
+/* ===========================
+   BADGES & STATUS
+   =========================== */
+/* 1. First, we must make space inside the Header for the badge */
+h2#name {
+    position: relative !important;
+    padding-top: 35px !important; /* This creates a 'hole' for the badge to sit in */
+    display: block !important;    /* Forces the name to be a solid block */
+    margin-top: 20px !important;
+}
+
+/* 2. Now we style the badge to sit in that hole */
+h2#name::before {
+    content: '✓ IN STOCK';
+    position: absolute !important;
+    top: 0 !important;             /* Moves it to the very top of the padding we made */
+    left: 0 !important;
+    
+    /* This stops it from 'sticking' to the letters */
+    transform: translateY(0); 
+    
+    /* Your Design Styling */
+    background-color: rgb(13, 183, 19);
+    color: var(--white) !important;
+    padding: 0.4rem 1rem !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
+    width: fit-content !important;
+    white-space: nowrap !important;
+}
+/* Out of stock styling (when inStock = false) */
+body.out-of-stock h2#name::before {
+  content: '⚠ PRE-ORDER';
+  background-color: var(--accent-color);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-sm);
+  }
+  
+  body > * {
+    padding: var(--spacing-md);
+  }
+  
+  #buttons {
+    flex-direction: column;
+  }
+  
+  .add-tocart {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  a.img {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  .switcher {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  h2#name::before {
+    position: static;
+    display: inline-block;
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 14px;
+  }
+  
+  div[style*="margin-top:10px"] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  a.img {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ===========================
+   ANIMATIONS
+   =========================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+h2#name {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+h3#price {
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.product-img {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+#buttons {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+/* ===========================
+   UTILITY CLASSES
+   =========================== */
+
+/* Hover glow effect */
+.add-tocart:hover {
+  box-shadow: 0 0 30px rgba(0, 168, 107, 0.4);
+}
+
+#preorderBtn:hover {
+  box-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Prevent text selection on buttons */
+button,
+a.img {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Smooth transitions for everything */
+* {
+  transition: color var(--transition), 
+              background-color var(--transition),
+              border-color var(--transition);
+}
+
+/* ===========================
+   LOADING STATE
+   =========================== */
+
+.add-tocart.loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.add-tocart.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--white);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================================
+   SIZE SELECTOR STYLES
+================================ */
+
+.size-selector {
+  margin: 20px 0;
+}
+
+.size-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.size-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.size-btn {
+  padding: 10px 16px;
+  border: 2px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.25s ease;
+}
+
+.size-btn:hover {
+  border-color: #000;
+  transform: translateY(-2px);
+}
+
+.size-btn.active {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.size-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Error message */
+.size-error {
+  color: #e53935;
+  font-size: 14px;
+  margin-top: 8px;
+  display: none;
+}
+
+/* ================================
+   OPTIONAL: SIZE CHART BUTTON
+================================ */
+
+.size-chart-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 480px) {
+  .size-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+}

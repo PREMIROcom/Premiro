@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premiro | Football Store in Egypt</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="premro styels/premiro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content"> 
+                <a href="#" class="logo">
+                    <div class="logo-text">Premiro<span></span></div>
+                </a>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#best-products" class="nav-link">Best Products</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#products" class="nav-link">Categories</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#Footer" class="nav-link">About Us</a></li>
+                <button class="cart" onclick="openCart()">🛒 Cart</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Premiro <span>Football Shop</span> Without Limits</h1>
+                    <p>Premiro is your ultimate football shop — bringing you the best in football gear, from pro-quality shoes and socks to shirts, balls, cards, and healthy snacks for athletes.
+We’re all about style, comfort, and performance — everything a true football fan needs, all in one place. ⚽🔥
+
+Shop smart. Play hard. Stay Premiro.</p>
+                    <div class="hero-buttons">
+                          <a onclick="window.location.href='secret.html'" class="btn btn-secondary fade-in-delay">View Our Products</a>
+                        <a href="#Footer" class="btn btn-secondary fade-in-delay">About Us</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-visual">
+                        <img src="premro img/74123.jpeg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- ========================================
+     BEST PRODUCTS CAROUSEL SECTION
+     Add this to your index.html after the hero section
+     ======================================== -->
+
+<!-- Best Products Section -->
+<section id="best-products" class="section best-products">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">⭐ Our Best Products</h2>
+            <p class="section-subtitle">Top picks chosen by our customers</p>
+        </div>
+
+        <div class="carousel-container">
+            <!-- Previous Button -->
+            <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <!-- Products Carousel -->
+            <div class="carousel-track" id="carouselTrack" style="transition: transform 0.4s; transform: translateX(0px);">
+                <!-- Product 1: XAVER SCHLAGER -->
+                <div class="carousel-card active">
+                    <div class="best-badge">🏆 Best Seller</div>
+                    <img src="premro img/WhatsApp Image 2025-11-14 at 14.30.47_5d8ce9b7.jpg" 
+                         alt="XAVER SCHLAGER">
+                    <div class="card-content">
+                        <h3>XAVER SCHLAGER</h3>
+                        <p class="price">25 LE</p>
+                        <p class="description">Match Attax Trading Card</p>
+                        <div class="card-buttons">
+                            <button class='view-details' onclick="window.location.href='product1.html'">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2: REAL MADRID -->
+                <div class="carousel-card">
+                    <div class="best-badge">⚡ Popular</div>
+                    <img src="premro img/WhatsApp Image 2025-11-14 at 16.11.26_4f1110c5.jpg" 
+                         alt="REAL MADRID">
+                    <div class="card-content">
+                        <h3>REAL MADRID</h3>
+                        <p class="price">10 LE</p>
+                        <p class="description">Club Badge Card</p>
+                        <div class="card-buttons">
+                        <button class='view-details' onclick="window.location.href='product2.html'">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3: BARELLA -->
+                <div class="carousel-card">
+                    <div class="best-badge">🔥 Hot</div>
+                    <img src="premro img/67.jpg" 
+                         alt="BARELLA">
+                    <div class="card-content">
+                        <h3>BARELLA</h3>
+                        <p class="price">10 LE</p>
+                        <p class="description">Inter Milan Card</p>
+                        <div class="card-buttons">
+                           <button class='view-details' onclick="window.location.href='product3.html'">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4: RONALDO -->
+                <div class="carousel-card">
+                    <div class="best-badge">⭐ Featured</div>
+                    <img src="premro img/333.jpg" 
+                         alt="RONALDO">
+                    <div class="card-content">
+                        <h3>RONALDO</h3>
+                        <p class="price">10 LE</p>
+                        <p class="description">World Football Stars</p>
+                        <div class="card-buttons">
+                            <button class='view-details' onclick="window.location.href='product18.html'">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5: GVARDIOL -->
+                <div class="carousel-card">
+                    <div class="best-badge">💎 Premium</div>
+                    <img src="premro img/1.jpeg" 
+                         alt="GVARDIOL">
+                    <div class="card-content">
+                        <h3>GVARDIOL</h3>
+                        <p class="price">10 LE</p>
+                        <p class="description">Man City Card</p>
+                        <div class="card-buttons">
+                            <button class='view-details' onclick="window.location.href='product4.html'">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6: RODRYGO -->
+                <div class="carousel-card">
+                    <div class="best-badge">🌟 New</div>
+                    <img src="premro img/55.jpg" 
+                         alt="RODRYGO">
+                    <div class="card-content">
+                        <h3>RODRYGO</h3>
+                        <p class="price">10 LE</p>
+                        <p class="description">World Football Stars</p>
+                        <div class="card-buttons">
+                            <button class='view-details' onclick="window.location.href='product17.html'">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Button -->
+            <button class="carousel-btn next-btn" onclick="moveCarousel(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Carousel Dots -->
+        <div class="carousel-dots" id="carouselDots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+        <!-- View All Button -->
+        <div style="text-align: center; margin-top: 2rem;">
+            <a class='btn btn-primary' href='secret.html'>View All Products</a>
+        </div>
+    </div>
+</section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">We offer everything you need to go pro.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img class="icon" src="premro img/soccer-players-are-practicing-on-the-field-vector.jpg">
+                        
+                    </div>
+                    <h3>Places To Practice</h3>
+                    <p>We give you the best places next to you to go practice.</p>
+                </div>
+                <div class="service-card">
+                   <div class="service-icon">
+                    <img class="icon" src="premro img/soccer-player-kicking-ball-football-footballer-s-leg-sports-cleats-ball-kick-illustration-isolated-on-white-background-soccer-ball-sport-icon-vintage-engraving-sketch-free-vector.jpg" alt="">
+                        
+                    </div>
+                    <h3>Places To Play With Your Friends</h3>
+                    <p>Football Pitch To Play With Your Friends.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img class="icon" src="premro img/cenoa-featured-image-pros-cons-buying-usd.png" alt=""> 
+                        
+                    </div>
+                    <h3>Buying Football Items</h3>
+                    <p>Here you can find the best quality to become a pro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Products Section -->
+     <!-- i need to make it for products later -->
+    <section id="products" class="section portfolio">
+        <div class="container">
+            <div class="section-header"> 
+                <h2 class="section-title">Categories</h2>
+                <p class="section-subtitle">Browse a collection of our products that are high quality</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/images.jpg" alt="Football Shoes">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Shoes</h3>
+                        <p>All Shoes With The Best Quality AND The Best Styles.</p>
+                        <div class="portfolio-tags">
+                            <span onclick="window.location.href='secret24.html'" class="tag">All</span>
+                        <span class="tag">Original</span>
+                            <span class="tag">Mirror</span>
+                            <span  onclick="window.location.href='secret25.html'"  class="tag">High Copy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/il_fullxfull.3656505886_r7x5.avif" alt="Football T-Shirt's">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football T-Shirts</h3>
+                        <p>You Style Your Journey | High Quality.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag" onclick="window.location.href='secret27.html'">All</span>
+                            <span onclick="window.location.href='shrit.html'" class="tag">Custom</span>
+                    <span class="tag" onclick="window.location.href='secret26.html'">Ready</span>
+                            <span onclick="window.location.href='secret1.html'" class="tag">Blank</span>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/222.jpg" alt="Football set's">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Sets</h3>
+                        <p>You Style Your Journey | High Quality.</p>
+                        <div class="portfolio-tags">
+                        <span class="tag" onclick="window.location.href='secret28.html'">All</span>
+
+                            <span   class="tag">Custom</span>
+                            <span  class="tag">Ready</span>
+                            <span onclick="window.location.href='secret2.html'" class="tag">Blank</span>
+                        </div>
+                        </div>
+                        </div>
+
+                            <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/h.jpg" alt="Football hode's">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Hoodies</h3>
+                        <p>You Style Your Journey | High Quality.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag" onclick="window.location.href='secret29.html'">All</span>
+                            <span class="tag">Custom</span>
+                            <span class="tag">Ready</span>
+                            <span class="tag">Blank</span>
+                        </div>
+                        </div>
+                        </div>
+                    
+                            <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/000.jpg" alt="Football sewte's">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Sweaters</h3>
+                        <p>You Style Your Journey | High Quality.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag" onclick="window.location.href='secret30.html'">All</span>
+                            <span class="tag">Custom</span>
+                            <span class="tag">Ready</span>
+                            <span class="tag">Blank</span>
+                        </div>
+                        </div>
+                        </div>
+                    
+                    
+                        <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/flat-football-elements_23-2147525238.avif" alt="Football Items">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>All Football Items</h3>
+                        <p>Get All You Want OF Practice, Safety AND Ref Items.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag" onclick="window.location.href='secret31.html'">All</span>
+                            <span class="tag">Practice</span>
+                            <span class="tag">Ref</span>
+                            <span class="tag">Bottles</span>
+                             <span class="tag">Shin Pads</span>
+                             <soan class="tag">GK Gloves</soan>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/images (1).jpg" alt="Helthy Food">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Healthy Food</h3>
+                        <p>Pro Player = Healthy Food Organized.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag" onclick="window.location.href='secret32.html'">All</span>
+                            <span class="tag">Home Made</span>
+                            <span class="tag">Healthy Food</span>
+                            <span class="tag">Protein Bars</span>
+                            <span class="tag">Protein Shakes</span>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/soccer-player-kicking-ball-football-footballer-s-leg-sports-cleats-ball-kick-illustration-isolated-on-white-background-soccer-ball-sport-icon-vintage-engraving-sketch-free-vector.jpg" alt="Place's To Play With Your Frind's">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Places to play with your friends</h3>
+                        <p>Places to play with your friends | Have Fun.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">View All</span>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/soccer-players-are-practicing-on-the-field-vector.jpg" alt="Place's To Pract's">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Places to practice</h3>
+                        <p>Places to practice | Your Practice Your Journey To Be A Pro Player.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">View All</span>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/grip-star-football-socks-white.webp" alt="Football Soks">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Socks</h3>
+                        <p>Play With Comfortable Socks</p>
+                        <div class="portfolio-tags">
+                            <span class="tag" onclick="window.location.href='secret33.html'">All</span>
+                            <span class="tag">Long</span>
+                            <span class="tag">Short</span>
+                            <span class="tag">Silicon Long</span>
+                            <span class="tag">Silicon Short</span>
+                        </div>
+                        </div>
+                        </div>
+<div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/football.tmb-esize-800-.jpg" alt="Football Bals">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Balls</h3>
+                        <p>Your Choice Your Style</p>
+                        <div class="portfolio-tags">
+                            <span class="tag" onclick="window.location.href='secret34.html'">All</span>
+                            <span class="tag">Normal</span> 
+                            <span class="tag">League</span>
+                            <span class="tag">Tournament</span>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/wq.jpg">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Match Attax 24/25 Cards</h3>
+                        <p>TRADE SELL PLAY YOUR CHOICE</p>
+                        <div class="portfolio-tags">
+                            <span onclick="window.location.href='secret3.html'" class="tag">ALL</span>
+                            <span onclick="window.location.href='secret12.html'" class="tag">Ultra Rare</span>
+                            <span onclick="window.location.href='secret11.html'" class="tag">Rare</span>
+                            <span onclick="window.location.href='secret10.html'"  class="tag">Normal</span>
+                            <span onclick="window.location.href='custom-pack3.html'" class="tag">Custom Pack</span>
+                            <span class="tag">Closed Pack</span>
+                            <span class="tag">Closed Box</span>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/qw.jpg">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Match Attax 25/26 Cards</h3>
+                        <p>TRADE SELL PLAY YOUR CHOICE</p>
+                        <div class="portfolio-tags">
+                            <span onclick="window.location.href='secret9.html'" class="tag">ALL</span>
+                            <span  onclick="window.location.href='secret13.html'" class="tag">Ultra Rare</span>
+                            <span  onclick="window.location.href='secret14.html'" class="tag">Rare</span>
+                            <span  onclick="window.location.href='secret15.html'"  class="tag">Normal</span>
+                            <span  onclick="window.location.href='custom-pack2.html'" class="tag">Custom Pack</span>
+                            <span class="tag">Closed Pack</span>
+                            <span class="tag">Closed Box</span>
+                        </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/shopping.webp">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football PL Cards</h3> 
+                        <p>TRADE SELL PLAY YOUR CHOICE</p>
+                        <div class="portfolio-tags">
+                            <span onclick="window.location.href='secret4.html'" class="tag">ALL</span>
+                            <span onclick="window.location.href='secret6.html'" class="tag">Ultra Rare</span>
+                            <span  onclick="window.location.href='secret7.html'" class="tag">Rare</span>
+                            <span onclick="window.location.href='secret8.html'"   class="tag">Normal</span>
+                            <span onclick="window.location.href='custom-pack1.html'" class="tag">Custom Pack</span>
+                            <span   class="tag">Closed Pack</span>
+                            <span class="tag">Closed Box</span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/852.jpeg">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Football Panini World Cup Cards</h3> 
+                        <p>TRADE SELL PLAY YOUR CHOICE</p>
+                        <div class="portfolio-tags">
+                        <span onclick="window.location.href='secret16.html'"  class="tag">ALL</span>
+                            <span onclick="window.location.href='secret17.html'"  class="tag">Ultra Rare</span>
+                            <span onclick="window.location.href='secret18.html'" class="tag">Rare</span>
+                            <span onclick="window.location.href='secret19.html'"  class="tag">Normal</span>
+                            <span onclick="window.location.href='custom-pack4.html'" class="tag">Custom Pack</span>
+                            <span class="tag">Closed Pack</span>
+                            <span class="tag">Closed Box</span>
+                        </div>
+                        </div>
+                    </div>
+
+
+                  
+                    <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/098.jpeg">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>All Football Cards</h3> 
+                        <p>TRADE SELL PLAY YOUR CHOICE</p>
+                        <div class="portfolio-tags">
+                            <span onclick="window.location.href='secret20.html'"   class="tag">ALL</span>
+                            <span onclick="window.location.href='secret21.html'"  class="tag">Ultra Rare</span>
+                            <span onclick="window.location.href='secret22.html'" class="tag">Rare</span>
+                            <span onclick="window.location.href='secret23.html'"  class="tag">Normal</span>
+                            <span onclick="window.location.href='custom-pack.html'" class="tag">Custom Pack</span>
+                            <span class="tag">Closed Pack</span>
+                            <span class="tag">Closed Box</span>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!--
+                    <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="premro img/885.jpg" alt="Football Bals">
+                    </div>
+                        <div class="portfolio-content">
+                        <h3>FOOTBALL world stars  CARD'S.</h3>
+                        <p>TRADE SELL PLAY YOUR CHOUIS</p>
+                        <div class="portfolio-tags">
+                            <span onclick="window.location.href='secret5.html'" class="tag">ALL</span>
+                            <span class="tag">urtarl rare</span>
+                            <span class="tag">Raer</span>
+                            <span class="tag">Normanl</span>
+                            <span class="tag">Costm Pack</span>
+                            <span class="tag">Coustm box</span>
+                            <span class="tag">Closed Pack</span>
+                            <span class="tag">Closed box</span>
+                            <span class="tag">seliver pack</span>
+                             <span class="tag">seliver box</span>
+                            <span onclick="window.location.href='secret5.html'" class="tag">Black</span>
+                              <span class="tag">Black box</span>
+                              <span class="tag">gold pack</span>
+                              <span class="tag">gold box</span>
+                        </div>
+                        </div>
+                        </div>
+                    -->
+                       </div></div></section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">We Are Here To Get Your Feedback</p>
+            </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <img src="premro img/3da7b352e0afb625e50ee95a6470c2e7.jpg">
+                        </div>
+                        <h3>Phone Number</h3>
+                        <p>+201010197615</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email Address</h3>
+                        <p>premiro639@gmail.com</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/187V7xuomv/" class="social-link"><i class="fab fa-facebook-f"></i>
+                            </a>
+                            <div class="social-linkss">
+                            <a href="https://www.youtube.com/@Premiro-y8l" class="social-link"><i class="YouTube"></i>
+                            <img class="icon" src="premro img/free-youtube-icon-123-thumb.png"></a>
+                            
+                        </div>
+                    </div>
+                </div>
+    <!-- Footer -->
+    <section id="Footer" class="section services">
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Premiro</h3>
+                    <p>Premiro — your ultimate football store in Egypt.
+We offer the best football shoes, jerseys, and collectible cards at unbeatable prices.
+Find top places to play and train across Egypt, and stay connected with us for new arrivals and special offers.
+© 2025 Premiro. All rights reserved.</p>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="#products "><i class="fas fa-chevron-right"></i> Categories</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i>Places To Practice</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i>Places To Play With Your Friends</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i>Buying Football Items</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025-2026 Premiro. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div></footer>
+</section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            mobileToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                this.querySelector('i').classList.toggle('fa-bars');
+                this.querySelector('i').classList.toggle('fa-times');
+            });
+            
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    document.querySelectorAll('.nav-link').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    this.classList.add('active');
+                    
+                    // Close mobile menu
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileToggle.querySelector('i').classList.remove('fa-times');
+                        mobileToggle.querySelector('i').classList.add('fa-bars');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Contact form
+            const contactForm = document.getElementById('contactForm');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    alert('Your message has been received successfully! We will contact you soon.');
+                    this.reset();
+                });
+            }
+            
+            // Newsletter form
+            const newsletterForm = document.querySelector('.newsletter-form');
+            
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    alert('Thank you for subscribing to our newsletter!');
+                    this.reset();
+                });
+            }
+        });
+ 
+
+// Open sidebar
+function openCart() {
+    document.getElementById("cartSidebar").style.right = "0";
+    renderCart();
+}
+
+// Close sidebar
+function closeCart() {
+    document.getElementById("cartSidebar").style.right = "-350px";
+}
+
+function renderCart() {
+            let container = document.getElementById("cartItems");
+            let totalDisplay = document.getElementById("total");
+            container.innerHTML = "";
+            let total = 0;
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            if (cart.length === 0) {
+                container.innerHTML = "<p style='text-align:center;'>Your cart is empty.</p>";
+                totalDisplay.innerText = "Total: 0 EGP";
+                return;
+            }
+
+            cart.forEach((item) => {
+                total += item.price * item.qty;
+                let sizeLine = (item.size && item.size !== "N/A") ? 
+                    `<p style="margin:2px 0; font-size:13px; color:#e67e22;">Size: ${item.size}</p>` : "";
+
+                container.innerHTML += `
+                    <div style="border-bottom:1px solid #eee; padding:10px 0; display:flex; align-items:center;">
+                        <img src="${item.image}" width="60" style="margin-right:10px; border-radius:5px;">
+                        <div style="flex-grow:1;">
+                            <h4 style="margin:0; font-size:15px;">${item.name}</h4>
+                            ${sizeLine}
+                            <p style="margin:5px 0; font-weight:bold;">${item.price} EGP</p>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button onclick="changeQty('${item.id}', -1, '${item.size}')" style="padding:0 5px;">-</button>
+                                <span>${item.qty}</span>
+                                <button onclick="changeQty('${item.id}', 1, '${item.size}')" style="padding:0 5px;">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeItem('${item.id}', '${item.size}')" style="color:red; background:none; border:none; cursor:pointer; font-size:18px;">&times;</button>
+                    </div>
+                `;
+            });
+            totalDisplay.innerText = "Total: " + total +  " EGP";
+        }
+//best proucts//
+let currentIndex = 0;
+const track = document.getElementById('carouselTrack');
+const cards = document.querySelectorAll('.carousel-card');
+const dotsContainer = document.getElementById('carouselDots');
+const total = cards.length;
+
+let currentTranslate = 0;
+let isDragging = false;
+let startX = 0;
+let velocity = 0;
+let lastX = 0;
+let lastTime = 0;
+const gap = 24;
+
+// dots
+dotsContainer.innerHTML = '';
+cards.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'dot';
+  if (i === 0) dot.classList.add('active');
+  dot.onclick = () => { currentIndex = i; update(); };
+  dotsContainer.appendChild(dot);
+});
+
+function update() {
+  const cardWidth = cards[0].offsetWidth + gap;
+  currentTranslate = -currentIndex * cardWidth;
+  track.style.transition = 'transform .4s ease';
+  track.style.transform = `translateX(${currentTranslate}px)`;
+
+  cards.forEach((c,i)=>c.classList.toggle('active', i===currentIndex));
+  document.querySelectorAll('.dot')
+    .forEach((d,i)=>d.classList.toggle('active', i===currentIndex));
+}
+
+update();
+
+function moveCarousel(dir) {
+  currentIndex += dir;
+  if (currentIndex < 0) currentIndex = total - 1;
+  if (currentIndex >= total) currentIndex = 0;
+  update();
+}
+
+// touch
+track.addEventListener('touchstart', e => {
+  isDragging = true;
+  startX = e.touches[0].clientX;
+  lastX = startX;
+  lastTime = Date.now();
+  velocity = 0;
+  track.classList.add('dragging');
+});
+
+track.addEventListener('touchmove', e => {
+  if (!isDragging) return;
+  const x = e.touches[0].clientX;
+  const delta = x - lastX;
+  const now = Date.now();
+  velocity = delta / (now - lastTime || 1);
+  lastX = x;
+  lastTime = now;
+  currentTranslate += delta;
+  track.style.transition = 'none';
+  track.style.transform = `translateX(${currentTranslate}px)`;
+});
+
+track.addEventListener('touchend', () => {
+  isDragging = false;
+  track.classList.remove('dragging');
+
+  const cardWidth = cards[0].offsetWidth + gap;
+  currentTranslate += velocity * 200;
+  currentIndex = Math.round(Math.abs(currentTranslate) / cardWidth);
+
+  if (currentIndex < 0) currentIndex = total - 1;
+  if (currentIndex >= total) currentIndex = 0;
+
+  update();
+});
+  
+</script>
+    <div id="cartDrawer" style=" 
+    position: fixed; 
+    right: -350px; /* Hidden off-screen by default */
+    top: 0;
+    width: 350px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 20px rgba(0,0,0,0.3);
+    padding: 20px;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out; /* Makes it slide out smoothly */
+    z-index: 9999;">
+    
+    <h2 style="color: #1a1a2e; margin-bottom: 15px; border-bottom: 2px solid #00a86b; padding-bottom: 10px;">Your Cart</h2>
+    <button class="revome" onclick="closeCart()">CLOSE Cart</button>
+    <br><br>
+
+    <div id="cartItems"></div>
+    
+    <h3 id="total" style="color: #00a86b; margin-top: 20px; font-size: 1.5rem; font-weight: 700; border-top: 2px solid #e1e8ed; padding-top: 15px;"></h3>
+    
+    <button onclick="window.location.href='chek out.html'" class="pay" style="margin-top: 15px;">Checkout</button>
+</div>
+<script src="cart.js"></script>  
+
+</section>
+</body>
+</html>

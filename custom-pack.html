@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PREMIRO – Pack Builder Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #e8b84b;
+      --gold-light: #f5d47c;
+      --bg: #0d0d0f;
+      --surface: #16161a;
+      --surface2: #1e1e24;
+      --border: #2a2a35;
+      --text: #f0f0f0;
+      --muted: #888;
+      --red: #e03030;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 120px; }
+
+    header {
+      background: var(--surface); border-bottom: 1px solid var(--border); padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 3px; color: var(--gold); cursor: pointer; }
+    .logo span { color: var(--text); }
+    .cart-btn { background: var(--gold); color: #000; border: none; padding: 10px 22px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; border-radius: 6px; cursor: pointer; }
+
+    main { padding: 30px 24px; max-width: 1300px; margin: 0 auto; }
+
+    /* Filter UI Row */
+    .filter-row { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 8px 20px; border: 1.5px solid var(--border); background: transparent; color: var(--muted);
+      border-radius: 30px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(232,184,75,0.08); }
+
+    /* Grid layout */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+    .shop-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: all 0.22s; }
+    .shop-card.in-pack { outline: 2px solid var(--gold); }
+    .card-img-wrap { position: relative; height: 200px; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .card-badge { position: absolute; top: 8px; right: 8px; background: var(--gold); color: #000; font-weight: 700; font-size: 11px; padding: 3px 8px; border-radius: 4px; }
+    
+    .card-info { padding: 12px 14px 14px; }
+    .card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .card-price { color: var(--gold); font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+    
+    .btn-pack-add { width: 100%; padding: 8px 0; border: none; border-radius: 6px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; cursor: pointer; background: var(--surface2); color: var(--gold); border: 1.5px solid var(--gold); }
+    .btn-pack-add.added { background: var(--gold); color: #000; }
+
+    /* ─── FLOATING HORIZONTAL PACK BUILDER OVERLAY BAR ─── */
+    .pack-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 2px solid var(--gold); z-index: 150; display: none; }
+    .pack-bar.visible { display: block; }
+    .pack-bar-inner { max-width: 1300px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .pack-bar-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--gold); }
+    .pack-slots { display: flex; gap: 8px; flex: 1; overflow-x: auto; }
+    .pack-slot { position: relative; width: 54px; height: 54px; border-radius: 8px; border: 1.5px solid var(--border); overflow: hidden; }
+    .pack-slot img { width: 100%; height: 100%; object-fit: cover; }
+    .pack-slot-remove { position: absolute; top: 2px; right: 2px; background: rgba(0,0,0,0.8); border: none; color: #fff; width: 16px; height: 16px; border-radius: 50%; font-size: 10px; cursor: pointer; }
+    
+    .pack-bar-add { padding: 12px 24px; background: var(--gold); color: #000; border: none; border-radius: 8px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; cursor: pointer; }
+    .pack-bar-add:disabled { opacity: 0.4; cursor: not-allowed; }
+    .pack-bar-clear { background: none; border: 1px solid var(--border); color: var(--muted); padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+
+    .pay { background:#e8b84b; color:black; border:none; padding:10px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer; }
+    .revome { background:#eee; border:none; padding:5px 10px; cursor:pointer; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="window.location.href='index.html'">PREMI<span>RO</span></div>
+  <button class="cart-btn" onclick="openCart()">🛒 Open Bag</button>
+</header>
+
+<main>
+  <div class="filter-row" id="filterRow"></div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</main>
+
+<div class="pack-bar" id="packBar">
+  <div class="pack-bar-inner">
+    <div class="pack-bar-title">🃏 Pack Items:</div>
+    <div class="pack-slots" id="packSlots"></div>
+    <div>
+      <div style="font-size:13px; color:var(--muted);"><span id="packCount" style="color:var(--gold); font-weight:bold;">0</span> selected (min 5)</div>
+      <div style="font-family:'Barlow Condensed'; font-size:20px;"><span id="packTotal">0</span> EGP</div>
+    </div>
+    <button class="pack-bar-add" id="packAddBtn" onclick="sendBundleToBag()" disabled>Add Bundle Pack to Bag</button>
+    <button class="pack-bar-clear" onclick="clearPack()">Clear Bundle</button>
+  </div>
+</div>
+
+<div id="cartSidebar" style="position: fixed; right: -350px; top: 0; width: 350px; height: 100%; background: white; box-shadow: -2px 0 10px rgba(0,0,0,0.3); padding: 20px; overflow-y: auto; transition: 0.3s; z-index: 9999;">
+    <h2 style="color: black;">Your Cart</h2>
+    <button class="revome" onclick="closeCart()">CLOSE Cart</button>
+    <br><br>
+    <div id="cartItems"></div>
+    <h3 id="total" style="color: black; margin-top: 20px;"></h3>
+    <button onclick="window.location.href='chek out.html'" class="pay">Checkout</button>
+</div>
+
+<script src="cart.js"></script>
+
+<script>
+const allCards = [
+  { id:"p1",  name:"XAVER SCHLAGER Man Of The Match Match Attax 24/25 Card", category:"ma24-25", price:25,  img:"premro img/WhatsApp Image 2025-11-14 at 14.30.47_5d8ce9b7.jpg" },
+  { id:"p2",  name:"REAL MADRID 23/24 Winners Match Attax 24/25 Card",      category:"ma24-25", price:10,  img:"premro img/WhatsApp Image 2025-11-14 at 16.11.26_4f1110c5.jpg" },
+  { id:"p3",  name:"BARELLA Match Attax 24/25 Card",                        category:"ma24-25", price:10,  img:"premro img/67.jpg" },
+  { id:"p4",  name:"GVARDIO Match Attax 24/25 Card",                        category:"ma24-25", price:10,  img:"premro img/1.jpeg" },
+  { id:"p5",  name:"BRADLEY Match Attax 24/25 Card",                        category:"ma24-25", price:5,   img:"premro img/78.jpeg" },
+  { id:"p6",  name:"BAYER 04 LEVERKUSEN Match Attax 24/25 Card",            category:"ma24-25", price:5,   img:"premro img/88.jpg" },
+  { id:"p7",  name:"KARIM ADEYEMI Match Attax 24/25 Card",                  category:"ma24-25", price:5,   img:"premro img/10.jpeg" },
+  { id:"p8",  name:"vfb stuttgart Match Attax 24/25 Card",                  category:"ma24-25", price:5,   img:"premro img/00.jpg" },
+  /*
+  { id:"p17", name:"RODRYGO World WORLD FOOTBALL STARS",                    category:"stars",   price:10,  img:"premro img/55.jpg" },
+  { id:"p18", name:"RONALDO World WORLD FOOTBALL STARS",                    category:"stars",   price:15,  img:"premro img/333.jpg" },
+  { id:"p19", name:"Jude Bellingham World WORLD FOOTBALL STARS",            category:"stars",   price:10,  img:"premro img/33.jpg" },
+  { id:"p20", name:"Laprta World WORLD FOOTBALL STARS",                     category:"stars",   price:5,   img:"premro img/555.jpg" },
+   */
+  { id:"p22", name:"Ousmane Dembele Counter Attax Match Attax 25/26 Card",   category:"ma25-26", price:50,  img:"premro img/45.jpg" },
+  { id:"p23", name:"Cody Gakpo Stealth Strike Match Attax 25/26 Card",       category:"ma25-26", price:50,  img:"premro img/95.jpeg" },
+  { id:"p24", name:"Alphonso Davies Man Of The Match Wildcard 25/26 Card",   category:"ma25-26", price:50,  img:"premro img/14.jpeg" },
+  { id:"p25", name:"Alessandro Buongiorno Tops Heritage Special 25/26 Card", category:"ma25-26", price:35,  img:"premro img/236.jpeg" },
+  { id:"p26", name:"Nuno Mendes Match Attax 25/26 Card",                    category:"ma25-26", price:15,  img:"premro img/788.jpeg" },
+  { id:"p27", name:"Ferran Torres Match Attax 25/26 Card",                  category:"ma25-26", price:15,  img:"premro img/777.jpeg" },
+  { id:"p28", name:"Endrick Match Attax 25/26 Card",                        category:"ma25-26", price:15,  img:"premro img/24.jpeg" },
+  { id:"p29", name:"Gabriel Martinell Match Attax 25/26 Card",              category:"ma25-26", price:15,  img:"premro img/25.jpeg" },
+  { id:"p30", name:"Fc porto Match Attax 25/26 Card",                        category:"ma25-26", price:10,  img:"premro img/79.jpeg" },
+  { id:"p31", name:"rangers Match Attax 25/26 Card",                         category:"ma25-26", price:10,  img:"premro img/998.jpeg" },
+  { id:"p32", name:"joao palhinha Match Attax 25/26 Card",                  category:"ma25-26", price:10,  img:"premro img/9898.jpeg" },
+  { id:"p33", name:"rasmus kriistensen Match Attax 25/26 Card",              category:"ma25-26", price:10,  img:"premro img/71.jpeg" },
+  { id:"p34", name:"omar marmoush Pl 25/26 Card",                           category:"pl25-26", price:30,  img:"premro img/996.webp" },
+  { id:"p35", name:"Amad Special Pl 25/26 Card",                             category:"pl25-26", price:30,  img:"premro img/7899.webp" },
+  { id:"p36", name:"vitalii mykolenoko Full Force Pl 25/26 Card",           category:"pl25-26", price:30,  img:"premro img/78963.webp" },
+  { id:"p37", name:"reece james Pl 25/26 Card",                             category:"pl25-26", price:20,  img:"premro img/78945.webp" },
+  { id:"p38", name:"adma traore Pl 25/26 Card",                             category:"pl25-26", price:20,  img:"premro img/opik.png" },
+  { id:"p39", name:"christian norgaad Retro Threads 2021/22 Pl 25/26 Card",  category:"pl25-26", price:15,  img:"premro img/7p.png" },
+  { id:"p40", name:"milos kerkez Pl 25/26 Card",                             category:"pl25-26", price:15,  img:"premro img/hgtrd.webp" },
+  { id:"p41", name:"MORGAN GIBBS WHITE Pl 25/26 Card",                      category:"pl25-26", price:15,  img:"premro img/9669.png" },
+  { id:"p42", name:"WEST HAM UNITED Pl 25/26 Card",                         category:"pl25-26", price:10,  img:"premro img/752.jfif" },
+  { id:"p44", name:"Alison Hero Wc 2026 Card",                              category:"wc2026",  price:30,  img:"premro img/0.005.jpeg" },
+  { id:"p45", name:"Reijnders Hero Wc 2026 Card",                           category:"wc2026",  price:10,  img:"premro img/-----l.jpeg" },
+  { id:"p46", name:"lawrence ati zigi Wc 2026 Card",                        category:"wc2026",  price:10,  img:"premro img/abc.jpeg" },
+  { id:"p47", name:"Luis Suarez Hero Wc 2026 Card",                         category:"wc2026",  price:10,  img:"premro img/412.jpeg" },
+  { id:"p48", name:"Rasmus Hojlund Contender Wc 2026 Card",                 category:"wc2026",  price:10,  img:"premro img/-=m.jpeg" },
+  { id:"p49", name:"Sadiod Mane Icon Wc 2026 Card",                         category:"wc2026",  price:20,  img:"premro img/00000.jpeg" },
+  { id:"p50", name:"Mac Allister Hero Wc 2026 Card",                        category:"wc2026",  price:15,  img:"premro img/789+..jpeg" },
+  { id:"p51", name:"Omar Marmoush GOAL MACHINE Wc 2026 Card",               category:"wc2026",  price:40,  img:"premro img/098.jpeg" }
+];
+
+const categories = [
+  { key:"all",       label:"All Cards" },
+  { key:"ma24-25",   label:"Match Attax 24/25" },
+  { key:"ma25-26",   label:"Match Attax 25/26" },
+  { key:"stars",     label:"Football Stars" },
+  { key:"pl25-26",   label:"PL 25/26" },
+  { key:"wc2026",    label:"World Cup 2026" }
+];
+
+let activeFilter = "all";
+let packSelection = [];
+
+function openCart() { document.getElementById("cartSidebar").style.right = "0px"; }
+function closeCart() { document.getElementById("cartSidebar").style.right = "-350px"; }
+
+function renderFilterRow() {
+  document.getElementById("filterRow").innerHTML = categories.map(c =>
+    `<button class="filter-btn ${c.key === activeFilter ? 'active' : ''}" onclick="setFilter('${c.key}')">${c.label}</button>`
+  ).join('');
+}
+
+function setFilter(key) {
+  activeFilter = key;
+  renderFilterRow();
+  renderShopCards();
+}
+
+function renderShopCards() {
+  const grid = document.getElementById("cardsGrid");
+  const filtered = activeFilter === "all" ? allCards : allCards.filter(c => c.category === activeFilter);
+  
+  grid.innerHTML = filtered.map(card => {
+    const inPack = packSelection.some(p => p.id === card.id);
+    const currentCat = categories.find(c => c.key === card.category);
+    const badgeLabel = currentCat ? currentCat.label : card.category;
+
+    return `
+    <div class="shop-card ${inPack ? 'in-pack' : ''}">
+      <div class="card-img-wrap">
+        <img src="${card.img}" alt="${card.name}">
+        <span class="card-badge">${badgeLabel}</span>
+      </div>
+      <div class="card-info">
+        <div class="card-name">${card.name}</div>
+        <div class="card-price">${card.price} EGP</div>
+        <button class="btn-pack-add ${inPack ? 'added' : ''}" onclick="togglePackCard('${card.id}')">
+          ${inPack ? '✓ Added to Bundle' : '＋ Add to Pack'}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function togglePackCard(id) {
+  const idx = packSelection.findIndex(p => p.id === id);
+  if (idx > -1) { 
+    packSelection.splice(idx, 1); 
+  } else { 
+    // Secure reference lookups directly from data array to safely bypass string parsing limits
+    const cardData = allCards.find(c => c.id === id);
+    if (cardData) {
+      packSelection.push(cardData);
+    }
+  }
+  renderShopCards();
+  renderPackBar();
+}
+
+function removeFromPack(id) {
+  packSelection = packSelection.filter(p => p.id !== id);
+  renderShopCards();
+  renderPackBar();
+}
+
+function clearPack() {
+  packSelection = [];
+  renderShopCards();
+  renderPackBar();
+}
+
+function renderPackBar() {
+  const bar = document.getElementById("packBar");
+  if (packSelection.length === 0) { bar.classList.remove("visible"); return; }
+  
+  bar.classList.add("visible");
+  const totalSum = packSelection.reduce((s, c) => s + c.price, 0);
+
+  document.getElementById("packCount").textContent = packSelection.length;
+  document.getElementById("packTotal").textContent = totalSum;
+  document.getElementById("packAddBtn").disabled = packSelection.length < 5;
+
+  document.getElementById("packSlots").innerHTML = packSelection.map(c => `
+    <div class="pack-slot">
+      <img src="${c.img}" alt="${c.name}">
+      <button class="pack-slot-remove" onclick="removeFromPack('${c.id}')">×</button>
+    </div>`).join('');
+}
+
+function sendBundleToBag() {
+  if (packSelection.length < 5) return;
+  const totalPrice = packSelection.reduce((s, c) => s + c.price, 0);
+  const itemsSummary = packSelection.map(c => c.name).join(' | ');
+  const bundleID = "pack_" + Date.now();
+
+  addToCart(bundleID, `Custom Pack: Bundle (${packSelection.length} cards - Includes: ${itemsSummary})`, totalPrice, "https://placehold.co/300x400/1e1e24/e8b84b?text=PACK", false, "N/A");
+  
+  clearPack();
+  openCart();
+}
+
+// Initializing UI Views
+renderFilterRow();
+renderShopCards();
+</script>
+</body>
+</html>

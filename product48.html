@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="premro styels/product detal.css">
+    <script src="cart.js"></script>
+
+    <script>
+        /* ==========================================================
+           🔵 CHANGE ONLY THESE 4 LINES FOR EVERY PRODUCT
+           ========================================================== */
+
+        const PRODUCT_ID = "product48";   /* 🔵 CHANGE THIS for next product */
+        const PRODUCT_NAME = "Rasmus Højlund Contender WC 2026 Card";  /* 🔵 CHANGE THIS */
+        const PRODUCT_PRICE = 10;      /* 🔵 CHANGE THIS */
+        const inStock = true;         /* 🔵 true = in stock | false = sold out (pre-order) */
+
+        /* ==========================================================
+           DO NOT CHANGE ANYTHING BELOW THIS LINE
+           ========================================================== */
+    </script>
+</head>
+
+<body style="font-family:Arial; padding:20px;">
+<div class="product-container">
+    <!-- Name & Price -->
+    <h2 id="name"></h2>
+    <h3 id="price"></h3>
+
+    <!-- 🔵 CHANGE YOUR IMAGE LINKS ONLY -->
+    <img id="img1" class="product-img" src="premro img/-=m.jpeg ">
+    <img id="img2" class="product-img" src="premro img/0p0.jpeg">
+
+    <!-- Image Switcher -->
+    <div style="margin-top:10px;">
+        <a class="img" href="#img1" onclick="switchImg(1)">⬅ Previous IMG</a> |
+        <a class="img" href="#img2" onclick="switchImg(2)">Next IMG ➡ </a>
+    </div>
+    
+    <div style="margin-top:10px">
+        <button onclick="window.location.href='product47.html'" class="switcher">⬅ Previous product</button>
+        <button onclick="window.location.href='product49.html'" class="switcher">Next product ➡ </button>
+    </div>
+
+    
+
+    <!-- Buttons -->
+    <div id="buttons">
+        <!-- IN STOCK BUTTONS -->
+        <button class="add-tocart" id="addCartBtn" style="display:none;">Add to Cart</button>
+        <button class="add-tocart buy-now" id="buyNowBtn" style="display:none;">BUY NOW</button>
+        
+        <!-- OUT OF STOCK BUTTON -->
+        <button class="add-tocart" id="preorderBtn" style="display:none;">Pre-Order</button>
+    </div>
+</div>
+
+<script>
+    /* Insert name + price into page */
+    document.getElementById("name").innerText = PRODUCT_NAME;
+    document.getElementById("price").innerText = "Price: " + PRODUCT_PRICE + " EGP";
+
+    /* Image switcher function */
+    function switchImg(imgNum) {
+        document.getElementById("img1").style.display = imgNum === 1 ? "block" : "none";
+        document.getElementById("img2").style.display = imgNum === 2 ? "block" : "none";
+    }
+
+    /* Show correct buttons (Add to Cart + Buy Now OR Pre-order) */
+    function updateButtons() {
+        const addBtn = document.getElementById("addCartBtn");
+        const buyBtn = document.getElementById("buyNowBtn");
+        const preBtn = document.getElementById("preorderBtn");
+
+        if (inStock === false) {
+            // OUT OF STOCK - Hide both buttons, show pre-order
+            addBtn.style.display = "none";
+            buyBtn.style.display = "none";
+            preBtn.style.display = "block";
+            document.body.classList.add('out-of-stock');
+        } else {
+            // IN STOCK - Show both buttons, hide pre-order
+            addBtn.style.display = "block";
+            buyBtn.style.display = "block";
+            preBtn.style.display = "none";
+            document.body.classList.remove('out-of-stock');
+        }
+    }
+    
+    // Call the function when page loads
+    updateButtons();
+
+    /* Add to Cart Button */
+    document.getElementById("addCartBtn").onclick = function () {
+        addToCart(PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, document.getElementById("img1").src);
+    };
+
+    /* Buy Now Button - Updated */
+document.getElementById("buyNowBtn").onclick = function () {
+    // 1. Add to cart
+    addToCart(PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, document.getElementById("img1").src);
+    
+    // 2. Immediate redirect (no delay needed now because addToCart is fast)
+    // Make sure the file name matches your checkout file exactly!
+    window.location.href = 'chek out.html'; 
+};
+
+    /* Pre-order Button */
+    document.getElementById("preorderBtn").onclick = function () {
+        addToCart(PRODUCT_ID + "-preorder", PRODUCT_NAME + " (Pre-Order)", PRODUCT_PRICE, document.getElementById("img1").src);
+    };
+
+    /* Add to Cart Button */
+document.getElementById("addCartBtn").onclick = function () {
+    // False means: "Don't clear the cart, just add this"
+    addToCart(PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, document.getElementById("img1").src, false);
+    alert("Added to cart!"); 
+};
+
+/* Buy Now Button */
+document.getElementById("buyNowBtn").onclick = function () {
+    // True means: "Clear everything else, I only want this item"
+    addToCart(PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, document.getElementById("img1").src, true);
+    window.location.href = 'chek out.html'; 
+};
+</script>
+
+</body>
+</html>

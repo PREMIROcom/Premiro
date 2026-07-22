@@ -1,0 +1,281 @@
+/* ===========================
+   PAYMENT BUTTONS - Professional CSS
+   Clean & Responsive
+   =========================== */
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colors */
+  --primary-color: #00a86b;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+  --transition: 0.3s ease;
+  
+  /* Spacing */
+  --gap: clamp(1rem, 2vw, 1.5rem);
+  --button-width: clamp(180px, 40vw, 250px);
+  --button-height: clamp(50px, 10vw, 70px);
+}
+
+/* ===========================
+   CONTAINER
+   =========================== */
+
+.div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: var(--gap);
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* ===========================
+   PAYMENT BUTTONS - Base Style
+   =========================== */
+
+.i,
+.v,
+.vi {
+  /* Size - Responsive */
+  width: var(--button-width);
+  height: var(--button-height);
+  
+  /* Background Image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Styling */
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  
+  /* Text */
+  color: transparent;
+  font-weight: bold;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Animation */
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===========================
+   INDIVIDUAL BUTTON BACKGROUNDS
+   =========================== */
+
+/* InstaPay Button */
+.i {
+  background-image: url("../premro%20img/images\ \(1.png");
+}
+
+/* Vodafone Cash Button */
+.v {
+  background-image: url("../premro%20img/18-1605361721.webp");
+}
+
+/* Additional Payment Button */
+.vi {
+  background-image: url("../premro%20img/23.jfif");
+}
+
+/* ===========================
+   HOVER EFFECTS
+   =========================== */
+
+.i:hover,
+.v:hover,
+.vi:hover {
+  /* Brightness & Lift */
+  filter: brightness(1.15);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  
+  /* Border Enhancement */
+  border-color: var(--primary-color);
+}
+
+/* Active State */
+.i:active,
+.v:active,
+.vi:active {
+  transform: translateY(-2px) scale(1);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===========================
+   ACCESSIBILITY & FOCUS
+   =========================== */
+
+.i:focus-visible,
+.v:focus-visible,
+.vi:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/* ===========================
+   LOADING STATE (Optional)
+   =========================== */
+
+.i.loading,
+.v.loading,
+.vi.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.i.loading::after,
+.v.loading::after,
+.vi.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===========================
+   BUTTON LABELS (If Needed)
+   =========================== */
+
+/* Add text label overlay if needed */
+.i::before,
+.v::before,
+.vi::before {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #333;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all var(--transition);
+}
+
+.i:hover::before,
+.v:hover::before,
+.vi:hover::before {
+  opacity: 1;
+  bottom: -35px;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+  .div {
+    gap: clamp(0.75rem, 3vw, 1rem);
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .i,
+  .v,
+  .vi {
+    border-width: 2px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .div {
+    justify-content: flex-start;
+    padding-top: 3rem;
+  }
+  
+  .i,
+  .v,
+  .vi {
+    width: min(85vw, 200px);
+    height: clamp(45px, 12vw, 60px);
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .div {
+    min-height: auto;
+    padding: 2rem 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ===========================
+   ACCESSIBILITY IMPROVEMENTS
+   =========================== */
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .i,
+  .v,
+  .vi {
+    transition: none;
+  }
+  
+  .i:hover,
+  .v:hover,
+  .vi:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .i,
+  .v,
+  .vi {
+    border-width: 4px;
+    border-color: #000;
+  }
+}
+
+/* ===========================
+   UTILITY CLASSES
+   =========================== */
+
+/* Disabled state */
+.i.disabled,
+.v.disabled,
+.vi.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Selected state */
+.i.selected,
+.v.selected,
+.vi.selected {
+  border-color: var(--primary-color);
+  border-width: 4px;
+  box-shadow: 0 0 0 4px rgba(0, 168, 107, 0.2);
+}

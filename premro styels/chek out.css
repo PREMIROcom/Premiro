@@ -1,0 +1,346 @@
+/* ===========================
+   CHECKOUT PAGE - Professional CSS
+   Matches Premiro Design
+   =========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #00a86b;
+  --primary-dark: #008556;
+  --secondary-color: #1a1a2e;
+  --text-dark: #2d3436;
+  --text-light: #636e72;
+  --bg-light: #f8f9fa;
+  --white: #ffffff;
+  --border-color: #e1e8ed;
+  --accent-color: #ff6b35;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+  padding: 2rem 1rem;
+}
+
+/* ===========================
+   VIEW CART BUTTON
+   =========================== */
+
+div[style*="text-align: right"] {
+  max-width: 600px;
+  margin: 0 auto 2rem !important;
+  text-align: right !important;
+  padding: 0 !important;
+}
+
+div[style*="text-align: right"] button {
+  background: var(--secondary-color) !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.75rem 1.5rem !important;
+  cursor: pointer !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+div[style*="text-align: right"] button:hover {
+  background: var(--primary-color) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ===========================
+   MAIN CONTAINER
+   =========================== */
+
+.div {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===========================
+   HEADING
+   =========================== */
+
+.div h2 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 800;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.div h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+  border-radius: 2px;
+}
+
+/* ===========================
+   FORM INPUTS
+   =========================== */
+
+.div input[type="text"],
+.div textarea {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: var(--bg-light);
+}
+
+.div input[type="text"]:focus,
+.div textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: var(--white);
+  box-shadow: 0 0 0 4px rgba(0, 168, 107, 0.1);
+  transform: translateY(-2px);
+}
+
+.div input[type="text"]::placeholder,
+.div textarea::placeholder {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.div textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* ===========================
+   PAYMENT BUTTONS
+   =========================== */
+
+.cash,
+.onlinen {
+  width: 100%;
+  padding: 1.25rem 2rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+/* Cash on Delivery Button */
+.cash {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: var(--white);
+}
+
+.cash::before {
+  content: '💵';
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.cash:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(0, 168, 107, 0.4);
+}
+
+/* Online Payment Button */
+.onlinen {
+  background: linear-gradient(135deg, var(--accent-color), #e55a2b);
+  color: var(--white);
+}
+
+.onlinen::before {
+  content: '💳';
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.onlinen:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+}
+
+/* Active State */
+.cash:active,
+.onlinen:active {
+  transform: translateY(-2px);
+}
+
+/* Ripple Effect */
+.cash::after,
+.onlinen::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.cash:active::after,
+.onlinen:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* ===========================
+   SECURE BADGE
+   =========================== */
+
+.div::before {
+  content: '🔒 Secure Checkout';
+  display: block;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background-color: var(--bg-light);
+  border-radius: 8px;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem 0.5rem;
+  }
+  
+  .div {
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .div h2 {
+    font-size: 1.5rem;
+  }
+  
+  .div input[type="text"],
+  .div textarea {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .cash,
+  .onlinen {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .div {
+    padding: 1.5rem 1rem;
+  }
+  
+  .div h2 {
+    font-size: 1.35rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cash::before,
+  .onlinen::before {
+    font-size: 1.25rem;
+  }
+}
+
+/* ===========================
+   ANIMATIONS
+   =========================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.div {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ===========================
+   FOCUS STYLES
+   =========================== */
+
+*:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* ===========================
+   LOADING STATE (Optional)
+   =========================== */
+
+.cash.loading,
+.onlinen.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
+}
+
+.cash.loading::before,
+.onlinen.loading::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+  left: 50%;
+  top: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

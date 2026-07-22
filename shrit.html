@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premiro Kit Lab | Professional Customizer</title>
+    
+    <!-- Premium Google Fonts Integration for Kit Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,700;1,700&family=Bebas+Neue&family=Fira+Sans+Extra+Condensed:wght@700&family=Oswald:wght@700&family=Teko:wght@600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Modern UI Variables & Reset */
+        :root {
+            --primary-dark: #13022f;
+            --accent-gold: #f2f261;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --transition-speed: 0.25s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #4a8cb9; /* Default initialized color fallback */
+            transition: background-color 0.4s ease;
+            padding: 20px;
+        }
+
+        /* Lab Customizer Card */
+        .kit-lab-container {
+            background: rgba(18, 18, 18, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 850px) {
+            .kit-lab-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        /* Left Side: Jersey Live Render Canvas */
+        .preview-canvas {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            aspect-ratio: 1 / 1;
+        }
+
+        #base-shirt {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* Advanced Font Layer Alignment */
+        #preview-name {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 75%; /* Keeps names safely clear of shoulder seams */
+            text-align: center;
+            white-space: nowrap;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: font-size 0.15s ease-out, margin-top 0.15s ease-out, color 0.2s ease;
+            z-index: 2;
+        }
+
+        #preview-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-weight: bold;
+            transition: font-size 0.15s ease-out, color 0.2s ease;
+            z-index: 2;
+            margin-top: 32%; /* Fixed standard baseline alignment relative to image frame */
+        }
+
+        /* Right Side: Control Panels & Inputs */
+        .controls-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #ffffff;
+        }
+
+        .brand-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .select-input, .text-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: none;
+            background: var(--input-bg);
+            color: #121212;
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .text-input:focus {
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* High-Fidelity Selector Buttons (Kit Versions & Sizes) */
+        .toggle-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .toggle-btn.active {
+            background: #ffffff;
+            color: var(--primary-dark);
+            border-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Interactive Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.1s ease, filter 0.2s ease, background-color 0.3s ease;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .add-to-cart {
+            background: #ffffff;
+            color: var(--primary-dark);
+        }
+
+        .add-to-cart:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .buy-now {
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .buy-now:hover {
+            filter: brightness(1.15);
+        }
+    </style>
+</head>
+<body id="page-body">
+
+    <div class="kit-lab-container">
+        
+        <!-- Render View -->
+        <div class="preview-canvas">
+            <div id="preview-name">NRUNU</div>
+            <div id="preview-number">25</div>
+            <img id="base-shirt" src="premro img/7899.avif" alt="Kit Preview Face">
+        </div>
+
+        <!-- Customizer Configuration Settings Interface -->
+        <div class="controls-panel">
+            <h1 class="brand-title">Premiro Kit Lab</h1>
+
+            <!-- Selector: Team/Club -->
+            <div class="input-group">
+                <label for="club-select">Team Style</label>
+                <select id="club-select" class="select-input" onchange="updateClub()">
+                    <option value="city">Man City</option>
+                    <option value="ahly">Al Ahly SC</option>
+                    <option value="zamalek">Zamalek SC</option>
+                    <option value="real">Real Madrid</option>
+                    <option value="brca">Barcelona</option>
+                    <option value="pool">Liverpool</option>
+                    <option value="psg">PSG</option>
+                    <option value="in">Inter Milan</option>
+                </select>
+            </div>
+
+            <!-- Selector: Variant Styles -->
+            <div class="input-group">
+                <label>Kit Version</label>
+                <div class="toggle-row">
+                    <button type="button" class="toggle-btn active" onclick="setKitType(this, 'home')">Home</button>
+                    <button type="button" class="toggle-btn" onclick="setKitType(this, 'away')">Away</button>
+                    <button type="button" class="toggle-btn" onclick="setKitType(this, 'third')">Third</button>
+                </div>
+            </div>
+
+            <!-- Fields: Custom Text Elements -->
+            <div class="input-group">
+                <label for="player-name">Player Name</label>
+                <input type="text" id="player-name" class="text-input" value="NRUNU" maxlength="16" placeholder="Enter name..." oninput="liveUpdate()">
+            </div>
+
+            <div class="input-group">
+                <label for="player-number">Player Number</label>
+                <input type="number" id="player-number" class="text-input" value="25" min="0" max="99" placeholder="00" oninput="liveUpdate()">
+            </div>
+
+            <!-- Selector: Sizes Layout -->
+            <div class="input-group">
+                <label>Size</label>
+                <div class="toggle-row">
+                    <button type="button" class="toggle-btn active" onclick="setSize(this, 'M')">M</button>
+                    <button type="button" class="toggle-btn" onclick="setSize(this, 'L')">L</button>
+                    <button type="button" class="toggle-btn" onclick="setSize(this, 'XL')">XL</button>
+                </div>
+            </div>
+
+            <!-- State Holders Hidden Form Elements -->
+            <input type="hidden" id="selected-size" value="M">
+            <input type="hidden" id="selected-kit-type" value="home">
+
+            <!-- Submission Calls -->
+            <div class="action-buttons">
+                <button type="button" class="btn add-to-cart" onclick="triggerCartAction(false)">Add To Cart</button>
+                <button type="button" class="btn buy-now" onclick="triggerCartAction(true)">Buy Now</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Live Execution Custom Engine System Block -->
+    <script>
+        // Master Config Array: Every variant controls its own sizing bounds, positioning, font choices and colors.
+        const kitData = {
+            city: {
+                home:  { img: "premro img/7899.avif", txt: "white", bg: "#4a8cb9", font: "'Barlow Condensed', sans-serif", letterSpacing: "1px", nameTop: "17%", maxNameSize: 2.3, numSize: "8.5rem" },
+                away:  { img: "premro img/ci.jpeg",   txt: "white", bg: "#121212", font: "'Barlow Condensed', sans-serif", letterSpacing: "1px", nameTop: "18%", maxNameSize: 2.2, numSize: "8.2rem" },
+                third: { img: "premro img/cit.jpeg",  txt: "black", bg: "#00ff00", font: "'Barlow Condensed', sans-serif", letterSpacing: "1px", nameTop: "16%", maxNameSize: 2.3, numSize: "8.5rem" }
+            },
+            ahly: {
+                home:  { img: "premro img/op.jpg",    txt: "white", bg: "#7b1010", font: "'Bebas Neue', sans-serif", letterSpacing: "3px", nameTop: "19%", maxNameSize: 2.4, numSize: "9rem" },
+                away:  { img: "premro img/a.jpeg",     txt: "#f2f261", bg: "black", font: "'Bebas Neue', sans-serif", letterSpacing: "3px", nameTop: "19%", maxNameSize: 2.4, numSize: "9rem" },
+                third: { img: "premro img/ah.jpeg",    txt: "darkgoldenrod", bg: "lightseagreen", font: "'Bebas Neue', sans-serif", letterSpacing: "3px", nameTop: "19%", maxNameSize: 2.4, numSize: "9rem" }
+            },
+            zamalek: {
+                home:  { img: "premro img/76.jpeg",   txt: "#e63946", bg: "#ffffff", font: "'Oswald', sans-serif", letterSpacing: "2px", nameTop: "18%", maxNameSize: 2.2, numSize: "8.5rem" },
+                away:  { img: "premro img/bnm.jpeg",  txt: "white", bg: "darkblue", font: "'Oswald', sans-serif", letterSpacing: "2px", nameTop: "18%", maxNameSize: 2.2, numSize: "8.5rem" },
+                third: { img: "premro img/zamalek_third.jpg", txt: "white", bg: "#e63946", font: "'Oswald', sans-serif", letterSpacing: "2px", nameTop: "18%", maxNameSize: 2.2, numSize: "8.5rem" }
+            },
+            real: {
+                home:  { img: "premro img/7896.jpeg", txt: "#1a1a2e", bg: "#2c3e50", font: "'Fira Sans Extra Condensed', sans-serif", letterSpacing: "0.5px", nameTop: "21%", maxNameSize: 2.1, numSize: "8rem" },
+                away:  { img: "premro img/rei.jpeg",  txt: "white", bg: "#1a1a2e", font: "'Fira Sans Extra Condensed', sans-serif", letterSpacing: "0.5px", nameTop: "20%", maxNameSize: 2.1, numSize: "8rem" },
+                third: { img: "premro img/re.jpeg",   txt: "black", bg: "lightblue", font: "'Fira Sans Extra Condensed', sans-serif", letterSpacing: "0.5px", nameTop: "20%", maxNameSize: 2.1, numSize: "8rem" }
+            },
+            brca: {
+                home:  { img: "premro img/0.0.jpeg",  txt: "#fff00f", bg: "#0037ff", font: "'Anton', sans-serif", letterSpacing: "1px", nameTop: "14%", maxNameSize: 2.0, numSize: "7.5rem" },
+                away:  { img: "premro img/br.jpeg",   txt: "black", bg: "yellow", font: "'Anton', sans-serif", letterSpacing: "1px", nameTop: "18%", maxNameSize: 2.2, numSize: "8.5rem" },
+                third: { img: "premro img/opp.jpeg",  txt: "orange", numTxt: "#283755", bg: "orange", font: "'Anton', sans-serif", letterSpacing: "1px", nameTop: "19%", maxNameSize: 2.1, numSize: "8.5rem" }
+            },
+            pool: {
+                home:  { img: "premro img/0.000.jpeg", txt: "white", bg: "#d60606b0", font: "'Barlow Condensed', sans-serif", letterSpacing: "1px", nameTop: "18%", maxNameSize: 2.1, numSize: "8.0rem" },
+                away:  { img: "premro img/po.jpeg", txt: "black", bg: "wheat", font: "'Barlow Condensed', sans-serif", letterSpacing: "1px", nameTop: "19%", maxNameSize: 2.2, numSize: "8.2rem" },
+                third: { img: "premro img/poo.jpeg", txt: "white", bg: "cyan ", font: "'Barlow Condensed', sans-serif", letterSpacing: "1px", nameTop: "17%", maxNameSize: 2.3, numSize: "8.5rem" }
+            },
+            psg: {
+                home:  { img: "premro img/0.00000.jpeg", txt: "white", bg: "#1e00ff", font: "'Teko', sans-serif", letterSpacing: "2px", nameTop: "11%", maxNameSize: 2.5, numSize: "8.5rem" },
+                away:  { img: "premro img/p.jpeg", txt: "black", bg: "white", font: "'Teko', sans-serif", letterSpacing: "2px", nameTop: "14%", maxNameSize: 2.5, numSize: "8.5rem" },
+                third: { img: "premro img/s.jpeg", txt: "white", bg: "red", font: "'Teko', sans-serif", letterSpacing: "2px", nameTop: "13%", maxNameSize: 2.5, numSize: "8.5rem" }
+            },
+            in: {
+                home:  { img: "premro img/0.000000.jpeg", txt: "white", bg: "#2803a1", font: "'Oswald', sans-serif", letterSpacing: "1.5px", nameTop: "21%", maxNameSize: 2.2, numSize: "8.5rem" },
+                away:  { img: "premro img/i.jpeg", txt: "#283755", bg: "white", font: "'Oswald', sans-serif", letterSpacing: "1.5px", nameTop: "15%", maxNameSize: 2.2, numSize: "8.2rem" },
+                third: { img: "premro img/n.jpeg", txt: "orangered", bg: "orangered", font: "'Oswald', sans-serif", letterSpacing: "1.5px", nameTop: "20%", maxNameSize: 2.2, numSize: "8.5rem" }
+            }
+        };
+
+        // Real-time Text Renderer & Font Multiplier
+        function liveUpdate() {
+            const nameInput = document.getElementById('player-name').value.toUpperCase();
+            const numInput = document.getElementById('player-number').value;
+            
+            const nameText = document.getElementById('preview-name');
+            const numText = document.getElementById('preview-number');
+            
+            nameText.innerText = nameInput;
+            numText.innerText = numInput;
+
+            const club = document.getElementById('club-select').value;
+            const type = document.getElementById('selected-kit-type').value;
+            const currentKit = kitData[club] ? kitData[club][type] : null;
+
+            if (currentKit) {
+                let optimalSize = currentKit.maxNameSize;
+                nameText.style.fontSize = optimalSize + "rem";
+
+                // Auto-scaling engine drops font-size down automatically for long names to avoid layout overflow
+                if (nameInput.length > 8) {
+                    let scaleFactor = 8 / nameInput.length;
+                    optimalSize = Math.max(currentKit.maxNameSize * scaleFactor, 1.25); 
+                    nameText.style.fontSize = optimalSize + "rem";
+                }
+            }
+        }
+
+        function setSize(btn, size) {
+            const row = btn.parentElement;
+            row.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('selected-size').value = size;
+        }
+
+        function setKitType(btn, type) {
+            const row = btn.parentElement;
+            row.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('selected-kit-type').value = type;
+            updateClub(); 
+        }
+
+        function updateClub() {
+            const club = document.getElementById('club-select').value;
+            const type = document.getElementById('selected-kit-type').value;
+            
+            const body = document.getElementById('page-body');
+            const nameText = document.getElementById('preview-name');
+            const numText = document.getElementById('preview-number');
+            const img = document.getElementById('base-shirt');
+            const buyBtn = document.querySelector('.buy-now');
+
+            const currentKit = kitData[club] ? kitData[club][type] : null;
+
+            if (currentKit) {
+                img.src = currentKit.img;
+                body.style.backgroundColor = currentKit.bg;
+                
+                // Inject Variant Specific Styling Engine Configs
+                nameText.style.fontFamily = currentKit.font;
+                numText.style.fontFamily = currentKit.font;
+                nameText.style.letterSpacing = currentKit.letterSpacing;
+                
+                nameText.style.marginTop = currentKit.nameTop;
+                numText.style.fontSize = currentKit.numSize;
+                
+                // Apply dynamic color assets
+                nameText.style.color = currentKit.txt;
+                numText.style.color = currentKit.numTxt ? currentKit.numTxt : currentKit.txt;
+                
+                // Ensure text stays perfectly readable on light background variants
+                buyBtn.style.backgroundColor = (currentKit.bg === "#ffffff" || currentKit.bg === "white") ? "#13022f" : currentKit.bg;
+
+                // Sync current character sizes instantly
+                liveUpdate();
+            }
+        }
+
+        function triggerCartAction(isBuyNow) {  
+            const name = document.getElementById('player-name').value;
+            const num = document.getElementById('player-number').value;
+            const size = document.getElementById('selected-size').value;
+            const kitType = document.getElementById('selected-kit-type').value;
+            const clubName = document.getElementById('club-select').options[document.getElementById('club-select').selectedIndex].text;
+
+            if(!name || !num) {
+                alert("⚠️ Please provide a Name and Number!");
+                return;
+            }
+
+            const generatedID = "KLAB-" + Date.now();
+            const fullItemName = `${clubName} (${kitType.toUpperCase()}) Kit (${name.toUpperCase()} #${num})`;
+            const price = 300; 
+            const imgPath = document.getElementById('base-shirt').src;
+
+            // Integration safety fallback if cart.js hasn't loaded yet
+            if (typeof addToCart === "function") {
+                addToCart(generatedID, fullItemName, price, imgPath, isBuyNow, size);
+                if(isBuyNow) { 
+                    window.location.href = 'chek out.html'; 
+                } else { 
+                    alert("✅ Jersey successfully added to bag!"); 
+                }
+            } else {
+                alert("Cart Integration Note: Data package formed successfully! (Make sure cart.js script asset is linked to this page to execute database additions).");
+            }
+        }
+
+        // Initialize state engine on view paint
+        window.onload = updateClub;
+    </script>
+</body>
+</html> 

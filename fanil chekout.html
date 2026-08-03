@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | PREMIRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c62828; /* Al Ahly Red */
+            --dark: #121212;
+            --white: #ffffff;
+            --gray: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--white);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        h2 { margin-bottom: 5px; font-weight: 700; }
+        p { opacity: 0.8; font-size: 0.9rem; margin-bottom: 30px; }
+
+        .order-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .total-row {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+            padding-top: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .instapay-btn {
+            background: #622181; /* Official InstaPay Purple */
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 18px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .instapay-btn:hover {
+            background: #7b2da1;
+            transform: translateY(-3px);
+        }
+
+        .instapay-btn img {
+            width: 24px;
+            filter: brightness(0) invert(1);
+        }
+
+        .back-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .step-indicator {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-card">
+        <div class="logo">PREMIRO</div>
+        <h2>Final Step</h2>
+        <p>Pay securely via InstaPay and send your receipt to WhatsApp to process your order.</p>
+
+        <div class="order-box">
+            <div id="paymentSummary">
+                <div class="order-row">
+                    <span>Items Total:</span>
+                    <span id="sub-price">0 EGP</span>
+                </div>
+                <div class="order-row">
+                    <span>Delivery:</span>
+                    <span id="del-price">0 EGP</span>
+                </div>
+                <div class="order-row total-row">
+                    <span>Total Amount:</span>
+                    <span id="grand-total">0 EGP</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="instapay-btn" onclick="openInstaPay()">
+            Pay with InstaPay
+        </button>
+
+        <button class="back-btn" onclick="window.history.back()">← Change Details</button>
+
+        <div class="step-indicator">
+            Step 1: InstaPay Payment | Step 2: WhatsApp Confirmation
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+    <script>
+                alert ("COME BACK AND THE BUTTON WILL CHNGE TO GO TO INSTPAY")
+
+        // Update the prices on this specific page when it loads
+        function updateFinalSummary() {
+            const pricing = getTotals(); // From cart.js
+            document.getElementById('sub-price').innerText = pricing.sub + " EGP";
+            document.getElementById('del-price').innerText = (pricing.del === 0 ? "FREE" : pricing.del + " EGP");
+            document.getElementById('grand-total').innerText = pricing.total + " EGP";
+        }
+        
+        window.onload = updateFinalSummary;
+    </script>
+</body>
+</html>

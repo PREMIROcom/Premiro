@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | PREMIRO</title>
+    <link rel="stylesheet" href="premro styels/chek out.css">
+</head>
+<body>
+
+    <div style="text-align: right;">
+        <button onclick="window.location.href='secret.html'">← BACK TO SHOPPING</button>
+    </div>
+
+    <div class="div">
+        <h2>Complete Your Order</h2>
+        
+        <input type="text" id="custName" placeholder="Full Name" required>
+        <input type="text" id="custPhone" placeholder="Phone Number (xxxxxxxxx)" required>
+        <textarea id="custAddress" placeholder="Full Delivery Address (Street, Building, Apartment...)" required></textarea>
+
+        <div style="color: var(--secondary-color); font-weight: 800; margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;">
+            <span>🛒</span> ORDER SUMMARY
+        </div>
+
+        <div id="cartItems" style="margin-bottom: 1.5rem;">
+            </div>
+
+        <div id="total" style="background: var(--bg-light); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+            </div>
+
+        <div style="margin-top: 2rem;">
+            <button class="cash" onclick="proceedToFinalCheckout('Cash')">
+    Cash on Delivery
+</button>
+
+<button class="onlinen" onclick="proceedToFinalCheckout('Online')">
+    Online payment now
+</button>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+
+</body>
+</html>

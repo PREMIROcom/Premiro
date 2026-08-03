@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premiro Kit Lab | Auto-Scanning Customizer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@700&family=Bebas+Neue&family=Fira+Sans+Extra+Condensed:wght@700&family=Oswald:wght@700&family=Teko:wght@600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-dark: #13022f;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --transition-speed: 0.25s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #4a8cb9;
+            transition: background-color 0.4s ease;
+            padding: 20px;
+        }
+
+        .kit-lab-container {
+            background: rgba(18, 18, 18, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 850px) {
+            .kit-lab-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        .preview-canvas-wrap {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            aspect-ratio: 1 / 1;
+        }
+
+        #kitCanvas {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .controls-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #ffffff;
+        }
+
+        .brand-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .select-input, .text-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: none;
+            background: var(--input-bg);
+            color: #121212;
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .toggle-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .toggle-btn.active {
+            background: #ffffff;
+            color: var(--primary-dark);
+            border-color: #ffffff;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.1s ease, filter 0.2s ease;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .add-to-cart {
+            background: #ffffff;
+            color: var(--primary-dark);
+        }
+
+        .buy-now {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body id="page-body">
+
+    <div class="kit-lab-container">
+        <div class="preview-canvas-wrap">
+            <canvas id="kitCanvas" width="800" height="800"></canvas>
+        </div>
+
+        <div class="controls-panel">
+            <h1 class="brand-title">Premiro Kit Lab</h1>
+
+            <div class="input-group">
+                <label for="club-select">Team Style</label>
+                <select id="club-select" class="select-input" onchange="updateClub()">
+                    <option value="city">Man City</option>
+                    <option value="ahly">Al Ahly SC</option>
+                    <option value="zamalek">Zamalek SC</option>
+                    <option value="real">Real Madrid</option>
+                    <option value="brca">Barcelona</option>
+                    <option value="pool">Liverpool</option>
+                    <option value="psg">PSG</option>
+                    <option value="in">Inter Milan</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Kit Version</label>
+                <div class="toggle-row">
+                    <button type="button" class="toggle-btn active" onclick="setKitType(this, 'home')">Home</button>
+                    <button type="button" class="toggle-btn" onclick="setKitType(this, 'away')">Away</button>
+                    <button type="button" class="toggle-btn" onclick="setKitType(this, 'third')">Third</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="player-name">Player Name</label>
+                <input type="text" id="player-name" class="text-input" value="NRUNU" maxlength="16" placeholder="Enter name..." oninput="renderCanvas()">
+            </div>
+
+            <div class="input-group">
+                <label for="player-number">Player Number</label>
+                <input type="text" id="player-number" class="text-input" value="25" maxlength="3" placeholder="00" oninput="renderCanvas()">
+            </div>
+
+            <div class="input-group">
+                <label>Size</label>
+                <div class="toggle-row">
+                    <button type="button" class="toggle-btn active" onclick="setSize(this, 'M')">M</button>
+                    <button type="button" class="toggle-btn" onclick="setSize(this, 'L')">L</button>
+                    <button type="button" class="toggle-btn" onclick="setSize(this, 'XL')">XL</button>
+                </div>
+            </div>
+
+            <input type="hidden" id="selected-size" value="M">
+            <input type="hidden" id="selected-kit-type" value="home">
+
+            <div class="action-buttons">
+                <button type="button" class="btn add-to-cart" onclick="triggerCartAction(false)">Add To Cart</button>
+                <button type="button" class="btn buy-now" onclick="triggerCartAction(true)">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+
+    <script>
+        const kitData = {
+            city: {
+                home:  { img: "premro img/7899.avif", txt: "#ffffff", bg: "#4a8cb9", font: "Barlow Condensed", letterSpacing: 2 },
+                away:  { img: "premro img/ci.jpeg",   txt: "#ffffff", bg: "#121212", font: "Barlow Condensed", letterSpacing: 2 },
+                third: { img: "premro img/cit.jpeg",  txt: "#000000", bg: "#00ff00", font: "Barlow Condensed", letterSpacing: 2 }
+            },
+            ahly: {
+                home:  { img: "premro img/op.jpg",    txt: "#ffffff", bg: "#7b1010", font: "Bebas Neue", letterSpacing: 4 },
+                away:  { img: "premro img/a.jpeg",     txt: "#f2f261", bg: "#111111", font: "Bebas Neue", letterSpacing: 4 },
+                third: { img: "premro img/ah.jpeg",    txt: "#b8860b", bg: "#20b2aa", font: "Bebas Neue", letterSpacing: 4 }
+            },
+            zamalek: {
+                home:  { img: "premro img/76.jpeg",   txt: "#e63946", bg: "#ffffff", font: "Oswald", letterSpacing: 3 },
+                away:  { img: "premro img/bnm.jpeg",  txt: "#ffffff", bg: "#00008b", font: "Oswald", letterSpacing: 3 },
+                third: { img: "premro img/zamalek_third.jpg", txt: "#ffffff", bg: "#e63946", font: "Oswald", letterSpacing: 3 }
+            },
+            real: {
+                home:  { img: "premro img/7896.jpeg", txt: "#1a1a2e", bg: "#2c3e50", font: "Fira Sans Extra Condensed", letterSpacing: 1 },
+                away:  { img: "premro img/rei.jpeg",  txt: "#ffffff", bg: "#1a1a2e", font: "Fira Sans Extra Condensed", letterSpacing: 1 },
+                third: { img: "premro img/re.jpeg",   txt: "#000000", bg: "#add8e6", font: "Fira Sans Extra Condensed", letterSpacing: 1 }
+            },
+            brca: {
+                home:  { img: "premro img/0.0.jpeg",  txt: "#fff00f", bg: "#0037ff", font: "Anton", letterSpacing: 2 },
+                away:  { img: "premro img/br.jpeg",   txt: "#000000", bg: "#ffff00", font: "Anton", letterSpacing: 2 },
+                third: { img: "premro img/opp.jpeg",  txt: "#283755", bg: "#ffa500", font: "Anton", letterSpacing: 2 }
+            },
+            pool: {
+                home:  { img: "premro img/0.000.jpeg", txt: "#ffffff", bg: "#d60606", font: "Barlow Condensed", letterSpacing: 2 },
+                away:  { img: "premro img/po.jpeg", txt: "#000000", bg: "#f5deb3", font: "Barlow Condensed", letterSpacing: 2 },
+                third: { img: "premro img/poo.jpeg", txt: "#ffffff", bg: "#00ffff", font: "Barlow Condensed", letterSpacing: 2 }
+            },
+            psg: {
+                home:  { img: "premro img/0.00000.jpeg", txt: "#ffffff", bg: "#1e00ff", font: "Teko", letterSpacing: 3 },
+                away:  { img: "premro img/p.jpeg", txt: "#000000", bg: "#ffffff", font: "Teko", letterSpacing: 3 },
+                third: { img: "premro img/s.jpeg", txt: "#ffffff", bg: "#ff0000", font: "Teko", letterSpacing: 3 }
+            },
+            in: {
+                home:  { img: "premro img/0.000000.jpeg", txt: "#ffffff", bg: "#2803a1", font: "Oswald", letterSpacing: 2 },
+                away:  { img: "premro img/i.jpeg", txt: "#283755", bg: "#ffffff", font: "Oswald", letterSpacing: 2 },
+                third: { img: "premro img/n.jpeg", txt: "#ff4500", bg: "#ff4500", font: "Oswald", letterSpacing: 2 }
+            }
+        };
+
+        const canvas = document.getElementById('kitCanvas');
+        const ctx = canvas.getContext('2d');
+        const loadedImages = {};
+        const scannedPositions = {};
+
+        function preloadImages() {
+            Object.keys(kitData).forEach(club => {
+                Object.keys(kitData[club]).forEach(type => {
+                    const item = kitData[club][type];
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous";
+                    img.src = item.img;
+                    img.onload = () => {
+                        const key = `${club}_${type}`;
+                        loadedImages[key] = img;
+                        scannedPositions[key] = scanJerseyBounds(img);
+                        renderCanvas();
+                    };
+                });
+            });
+        }
+
+        // AUTO-SCANNER ENGINE: Finds exact boundaries of jersey inside image pixels
+        function scanJerseyBounds(img) {
+            const scanCanvas = document.createElement('canvas');
+            scanCanvas.width = canvas.width;
+            scanCanvas.height = canvas.height;
+            const scanCtx = scanCanvas.getContext('2d');
+            
+            scanCtx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            const imgData = scanCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+            let top = 0;
+            let bottom = canvas.height;
+            let left = 0;
+            let right = canvas.width;
+
+            // 1. Scan from Top to Bottom for Collar Start
+            for (let y = 0; y < canvas.height; y += 4) {
+                let foundRow = false;
+                for (let x = 0; x < canvas.width; x += 4) {
+                    const alpha = imgData[(y * canvas.width + x) * 4 + 3];
+                    if (alpha > 20) {
+                        top = y;
+                        foundRow = true;
+                        break;
+                    }
+                }
+                if (foundRow) break;
+            }
+
+            // 2. Scan from Bottom to Top for Hem End
+            for (let y = canvas.height - 1; y >= 0; y -= 4) {
+                let foundRow = false;
+                for (let x = 0; x < canvas.width; x += 4) {
+                    const alpha = imgData[(y * canvas.width + x) * 4 + 3];
+                    if (alpha > 20) {
+                        bottom = y;
+                        foundRow = true;
+                        break;
+                    }
+                }
+                if (foundRow) break;
+            }
+
+            const jerseyHeight = Math.max(bottom - top, 300);
+
+            // Dynamically calculate proportion targets:
+            // Name = 32% down the shirt | Number = 62% down the shirt
+            return {
+                nameY: Math.round(top + (jerseyHeight * 0.32)),
+                numY: Math.round(top + (jerseyHeight * 0.62)),
+                nameSize: Math.round(jerseyHeight * 0.08),
+                numSize: Math.round(jerseyHeight * 0.28)
+            };
+        }
+
+        function renderCanvas() {
+            const club = document.getElementById('club-select').value;
+            const type = document.getElementById('selected-kit-type').value;
+            const currentKit = kitData[club] ? kitData[club][type] : null;
+
+            if (!currentKit) return;
+
+            const nameInput = document.getElementById('player-name').value.toUpperCase();
+            const numInput = document.getElementById('player-number').value;
+            const imgKey = `${club}_${type}`;
+            const img = loadedImages[imgKey];
+            const bounds = scannedPositions[imgKey] || { nameY: 260, numY: 520, nameSize: 52, numSize: 200 };
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Jersey
+            if (img && img.complete && img.naturalWidth !== 0) {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.fillStyle = currentKit.bg;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = currentKit.txt;
+
+            // Render Auto-Positioned Name
+            if (nameInput) {
+                let dynamicNameSize = bounds.nameSize;
+                if (nameInput.length > 8) {
+                    dynamicNameSize = Math.max(bounds.nameSize * (8 / nameInput.length), 22);
+                }
+
+                ctx.font = `700 ${dynamicNameSize}px '${currentKit.font}', sans-serif`;
+                if (ctx.letterSpacing !== undefined) {
+                    ctx.letterSpacing = `${currentKit.letterSpacing}px`;
+                }
+                ctx.fillText(nameInput, canvas.width / 2, bounds.nameY);
+            }
+
+            // Render Auto-Positioned Number
+            if (numInput) {
+                ctx.font = `700 ${bounds.numSize}px '${currentKit.font}', sans-serif`;
+                if (ctx.letterSpacing !== undefined) ctx.letterSpacing = "0px";
+                ctx.fillText(numInput, canvas.width / 2, bounds.numY);
+            }
+        }
+
+        function setSize(btn, size) {
+            btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('selected-size').value = size;
+        }
+
+        function setKitType(btn, type) {
+            btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('selected-kit-type').value = type;
+            updateClub();
+        }
+
+        function updateClub() {
+            const club = document.getElementById('club-select').value;
+            const type = document.getElementById('selected-kit-type').value;
+            const body = document.getElementById('page-body');
+            const buyBtn = document.querySelector('.buy-now');
+
+            const currentKit = kitData[club] ? kitData[club][type] : null;
+
+            if (currentKit) {
+                body.style.backgroundColor = currentKit.bg;
+                buyBtn.style.backgroundColor = (currentKit.bg === "#ffffff" || currentKit.bg === "white") ? "#13022f" : currentKit.bg;
+                renderCanvas();
+            }
+        }
+
+        function triggerCartAction(isBuyNow) {
+            const name = document.getElementById('player-name').value.trim();
+            const num = document.getElementById('player-number').value.trim();
+            const size = document.getElementById('selected-size').value;
+            const kitType = document.getElementById('selected-kit-type').value;
+            const clubSelect = document.getElementById('club-select');
+            const clubName = clubSelect.options[clubSelect.selectedIndex].text;
+
+            if (!name || !num) {
+                alert("⚠️ Please provide a Name and Number!");
+                return;
+            }
+
+            const canvasSnapshot = canvas.toDataURL('image/png');
+            const generatedID = "KLAB-" + Date.now();
+            const fullItemName = `${clubName} (${kitType.toUpperCase()}) Kit`;
+            const price = 300;
+
+            const customStatsData = {
+                playerName: name,
+                playerNumber: num,
+                clubName: clubName,
+                kitType: kitType,
+                snapshot: canvasSnapshot
+            };
+
+            if (typeof addToCart === "function") {
+                addToCart(generatedID, fullItemName, price, canvasSnapshot, isBuyNow, size, customStatsData);
+                if (isBuyNow) {
+                    window.location.href = 'chek out.html';
+                } else {
+                    alert("✅ Custom Kit added to bag!");
+                    if (typeof openCart === "function") openCart();
+                }
+            } else {
+                alert("Cart script missing! Make sure cart.js is included.");
+            }
+        }
+
+        window.onload = () => {
+            preloadImages();
+            updateClub();
+        };
+    </script>
+</body>
+</html>

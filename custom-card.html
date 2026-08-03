@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PREMIRO – Create Custom Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #e8b84b;
+      --gold-light: #f5d47c;
+      --bg: #0d0d0f;
+      --surface: #16161a;
+      --surface2: #1e1e24;
+      --border: #2a2a35;
+      --text: #f0f0f0;
+      --muted: #888;
+      --red: #e03030;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 60px;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(232,184,75,0.3);
+      cursor: pointer;
+    }
+    .logo span { color: var(--text); }
+    
+    .cart-btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 10px 22px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    main { padding: 30px 24px; max-width: 1300px; margin: 0 auto; }
+
+    /* ─── CUSTOMIZER LAYOUT ─── */
+    .customizer-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 36px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .customizer-layout { grid-template-columns: 1fr; }
+    }
+
+    .form-section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    
+    label { font-size: 13px; font-weight: 600; color: var(--muted); }
+    
+    input[type="text"], input[type="number"], select {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      outline: none;
+    }
+    input:focus, select:focus { border-color: var(--gold); }
+
+    .rating-wrap { display: flex; align-items: center; gap: 12px; }
+    input[type="range"] { flex: 1; accent-color: var(--gold); cursor: pointer; }
+    #ratingDisplay { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--gold); min-width: 36px; }
+
+    .style-picker { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 22px; }
+    .style-option { border: 2px solid var(--border); border-radius: 10px; padding: 8px; cursor: pointer; text-align: center; }
+    .style-option.selected { border-color: var(--gold); background: rgba(232,184,75,0.08); }
+    .style-preview { height: 48px; border-radius: 6px; margin-bottom: 5px; }
+    .style-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+
+    .upload-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 22px; text-align: center; cursor: pointer; position: relative; margin-bottom: 22px; }
+    .upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    #uploadedPreview { width: 100%; max-height: 140px; object-fit: cover; border-radius: 8px; display: none; margin-top: 10px; }
+
+    .submit-btn {
+      width: 100%; padding: 15px; background: var(--gold); color: #000; border: none; border-radius: 10px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+    }
+    .submit-btn:hover { background: var(--gold-light); }
+
+    /* ─── LIVE PREVIEW ─── */
+    .preview-sticky { position: sticky; top: 90px; }
+    
+    .card-preview-wrap { 
+      width: 360px; 
+      height: 480px; 
+      border-radius: 18px; 
+      overflow: hidden; 
+      position: relative; 
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7); 
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin: 0 auto;
+    }
+    
+    .card-preview-wrap.tpl-gold { background: linear-gradient(145deg, #1a1400, #3d2e00, #1a1400); }
+    .card-preview-wrap.tpl-silver { background: linear-gradient(145deg, #0e0e12, #2a2a35, #0e0e12); }
+    .card-preview-wrap.tpl-fire { background: linear-gradient(145deg, #1a0000, #4a1200, #1a0000); }
+    .card-preview-wrap.tpl-ice { background: linear-gradient(145deg, #001525, #002e4a, #001525); }
+
+    .card-tpl-border { position: absolute; inset: 8px; border-radius: 12px; pointer-events: none; z-index: 3; }
+    .tpl-gold .card-tpl-border { border: 1.5px solid rgba(232,184,75,0.6); }
+    .tpl-silver .card-tpl-border { border: 1.5px solid rgba(180,180,200,0.5); }
+    .tpl-fire .card-tpl-border { border: 1.5px solid rgba(230,80,0,0.6); }
+    .tpl-ice .card-tpl-border { border: 1.5px solid rgba(80,180,255,0.5); }
+
+    .card-tpl-photo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; z-index: 1; }
+    .card-tpl-photo-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 80px; z-index: 1; opacity: 0.15; }
+    
+    .card-tpl-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; min-height: 50%; z-index: 2; }
+    .tpl-gold .card-tpl-fade { background: linear-gradient(to top, #1a1400 40%, transparent); }
+    .tpl-silver .card-tpl-fade { background: linear-gradient(to top, #0e0e12 40%, transparent); }
+    .tpl-fire .card-tpl-fade { background: linear-gradient(to top, #1a0000 40%, transparent); }
+    .tpl-ice .card-tpl-fade { background: linear-gradient(to top, #001525 40%, transparent); }
+
+    .card-tpl-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 18px 18px; z-index: 4; }
+    .card-tpl-rating { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; margin-bottom: 2px; }
+    .tpl-gold .card-tpl-rating { color: var(--gold); }
+    .tpl-silver .card-tpl-rating { color: #c0c0d0; }
+    .tpl-fire .card-tpl-rating { color: #ff6030; }
+    .tpl-ice .card-tpl-rating { color: #60c8ff; }
+
+    .card-tpl-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: #fff; line-height: 1.1; }
+    .card-tpl-pos-team { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; margin-top: 3px; }
+    
+    .card-tpl-attrs { display: flex; gap: 14px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .card-tpl-attr { text-align: center; flex: 1; }
+    .attr-val { font-family: 'Bebas Neue', sans-serif; font-size: 20px; display: block; }
+    .attr-lbl { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.4); }
+
+    .pay { background:#e8b84b; color:black; border:none; padding:10px; width:100%; font-weight:bold; margin-top:10px; cursor:pointer; }
+    .revome { background:#eee; border:none; padding:5px 10px; cursor:pointer; color: black; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="window.location.href='index.html'">PREMI<span>RO</span></div>
+  <button class="cart-btn" onclick="openCart()">🛒 Open Bag</button>
+</header>
+
+<main>
+  <div class="customizer-layout">
+    <div>
+      <div class="form-section-title">Card Style</div>
+      <div class="style-picker">
+        <div class="style-option selected" onclick="selectStyle('gold', this)">
+          <div class="style-preview" style="background: linear-gradient(135deg,#3d2e00,#e8b84b,#3d2e00)"></div>
+          <div class="style-label">Gold</div>
+        </div>
+        <div class="style-option" onclick="selectStyle('silver', this)">
+          <div class="style-preview" style="background: linear-gradient(135deg,#1a1a25,#9090b0,#1a1a25)"></div>
+          <div class="style-label">Silver</div>
+        </div>
+        <div class="style-option" onclick="selectStyle('fire', this)">
+          <div class="style-preview" style="background: linear-gradient(135deg,#3a0000,#ff5010,#3a0000)"></div>
+          <div class="style-label">Fire</div>
+        </div>
+        <div class="style-option" onclick="selectStyle('ice', this)">
+          <div class="style-preview" style="background: linear-gradient(135deg,#001830,#40b8ff,#001830)"></div>
+          <div class="style-label">Ice</div>
+        </div>
+      </div>
+ 
+      <div class="form-section-title">Player Photo</div>
+      <div class="upload-zone">
+        <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(this)">
+        <div style="font-size:32px;">📸</div>
+        <div>Browse or upload photo</div>
+        <img id="uploadedPreview" src="" alt="">
+      </div>
+
+      <div class="form-section-title">Player Details</div>
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Player Name</label>
+          <input type="text" id="inp-name" placeholder="Mohamed Salah" oninput="syncPreview()">
+        </div>
+        <div class="form-group">
+          <label>Position</label>
+          <select id="inp-pos" onchange="syncPreview()">
+            <option value="ST">ST</option>
+            <option value="RW">RW</option>
+            <option value="LW">LW</option>
+            <option value="CM">CM</option>
+            <option value="CB">CB</option>
+            <option value="GK">GK</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Club</label>
+          <input type="text" id="inp-team" placeholder="Liverpool" oninput="syncPreview()">
+        </div>
+        <div class="form-group full">
+          <label>Overall Rating</label>
+          <div class="rating-wrap">
+            <input type="range" id="inp-rating" min="60" max="99" value="85" oninput="syncRating()">
+            <span id="ratingDisplay">85</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section-title">Attributes (0–99)</div>
+      <div class="form-grid">
+        <div class="form-group"><label>PAC</label><input type="number" id="inp-pac" value="88" oninput="syncPreview()"></div>
+        <div class="form-group"><label>SHO</label><input type="number" id="inp-sho" value="82" oninput="syncPreview()"></div>
+        <div class="form-group"><label>PAS</label><input type="number" id="inp-pas" value="79" oninput="syncPreview()"></div>
+        <div class="form-group"><label>DRI</label><input type="number" id="inp-dri" value="91" oninput="syncPreview()"></div>
+        <div class="form-group"><label>DEF</label><input type="number" id="inp-def" value="45" oninput="syncPreview()"></div>
+        <div class="form-group"><label>PHY</label><input type="number" id="inp-phy" value="76" oninput="syncPreview()"></div>
+      </div>
+
+      <button class="submit-btn" onclick="addCustomToBag()">➕ Add Custom Card to Bag</button>
+    </div>
+
+    <div class="preview-sticky">
+      <div class="card-preview-wrap tpl-gold" id="cardPreview">
+        <div class="card-tpl-border"></div>
+        <div class="card-tpl-photo-placeholder" id="previewPlaceholder">⚽</div>
+        <img class="card-tpl-photo" id="previewPhoto" src="" alt="" style="display:none">
+        <div class="card-tpl-fade"></div>
+        <div class="card-tpl-info">
+          <div class="card-tpl-rating" id="prevRating">85</div>
+          <div class="card-tpl-name" id="prevName">PLAYER NAME</div>
+          <div class="card-tpl-pos-team" id="prevPosTeam">ST · CLUB</div>
+          <div class="card-tpl-attrs">
+            <div class="card-tpl-attr"><span class="attr-val" id="pv-pac">88</span><span class="attr-lbl">PAC</span></div>
+            <div class="card-tpl-attr"><span class="attr-val" id="pv-sho">82</span><span class="attr-lbl">SHO</span></div>
+            <div class="card-tpl-attr"><span class="attr-val" id="pv-pas">79</span><span class="attr-lbl">PAS</span></div>
+            <div class="card-tpl-attr"><span class="attr-val" id="pv-dri">91</span><span class="attr-lbl">DRI</span></div>
+            <div class="card-tpl-attr"><span class="attr-val" id="pv-def">45</span><span class="attr-lbl">DEF</span></div>
+            <div class="card-tpl-attr"><span class="attr-val" id="pv-phy">76</span><span class="attr-lbl">PHY</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="cartSidebar" style="position: fixed; right: -350px; top: 0; width: 350px; height: 100%; background: white; box-shadow: -2px 0 10px rgba(0,0,0,0.3); padding: 20px; overflow-y: auto; transition: 0.3s; z-index: 9999;">
+    <h2 style="color: black;">Your Cart</h2>
+    <button class="revome" onclick="closeCart()">CLOSE Cart</button>
+    <br><br>
+    <div id="cartItems"></div>
+    <h3 id="total" style="color: black; margin-top: 20px;"></h3>
+    <button onclick="window.location.href='chek out.html'" class="pay">Checkout</button>
+</div>
+
+<script src="cart.js"></script>
+
+<script>
+  let currentStyle = 'gold';
+  let customPhotoDataUrl = "https://placehold.co/300x400/2a2a35/e8b84b?text=CUSTOM";
+
+  function openCart() { document.getElementById("cartSidebar").style.right = "0px"; }
+  function closeCart() { document.getElementById("cartSidebar").style.right = "-350px"; }
+
+  function selectStyle(style, el) {
+    currentStyle = style;
+    document.querySelectorAll('.style-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('cardPreview').className = `card-preview-wrap tpl-${style}`;
+  }
+
+  function handlePhotoUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      customPhotoDataUrl = e.target.result;
+      document.getElementById('uploadedPreview').src = e.target.result;
+      document.getElementById('uploadedPreview').style.display = 'block';
+      document.getElementById('previewPhoto').src = e.target.result;
+      document.getElementById('previewPhoto').style.display = 'block';
+      document.getElementById('previewPlaceholder').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function syncRating() {
+    const val = document.getElementById('inp-rating').value;
+    document.getElementById('ratingDisplay').textContent = val;
+    document.getElementById('prevRating').textContent = val;
+  }
+
+  function syncPreview() {
+    const name = document.getElementById('inp-name').value || 'PLAYER NAME';
+    const pos = document.getElementById('inp-pos').value;
+    const team = document.getElementById('inp-team').value || 'CLUB';
+    document.getElementById('prevName').textContent = name.toUpperCase();
+    document.getElementById('prevPosTeam').textContent = `${pos} · ${team}`;
+    ['pac','sho','pas','dri','def','phy'].forEach(attr => {
+      const val = document.getElementById(`inp-${attr}`).value || '0';
+      document.getElementById(`pv-${attr}`).textContent = val;
+    });
+  }
+
+  function addCustomToBag() {
+    const name = document.getElementById('inp-name').value.trim() || "Custom Player";
+    
+    // Hardcoded custom card item base price directly into function logic
+    const price = 150; 
+    const itemID = "custom_" + Date.now();
+    
+    const cardDetails = {
+      style: typeof currentStyle !== 'undefined' ? currentStyle : "Gold",
+      rating: document.getElementById('inp-rating')?.value || "99",
+      position: document.getElementById('inp-pos')?.value || "ST",
+      club: document.getElementById('inp-team')?.value || "N/A",
+      pac: document.getElementById('inp-pac')?.value || "99",
+      sho: document.getElementById('inp-sho')?.value || "99",
+      pas: document.getElementById('inp-pas')?.value || "99",
+      dri: document.getElementById('inp-dri')?.value || "99",
+      def: document.getElementById('inp-def')?.value || "99",
+      phy: document.getElementById('inp-phy')?.value || "99"
+    };
+    
+    addToCart(itemID, `${name} (Custom ${cardDetails.style.toUpperCase()})`, price, customPhotoDataUrl, false, "N/A", cardDetails);
+    openCart();
+  }
+</script>
+</body>
+</html>

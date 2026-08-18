@@ -109,35 +109,49 @@
 <script src="cart.js"></script>
 
 <script>
-const allCards = [
+const  allCards = [
   { id:"p1",  name:"XAVER SCHLAGER Man Of The Match Match Attax 24/25 Card", category:"ma24-25", price:25,  img:"premro img/WhatsApp Image 2025-11-14 at 14.30.47_5d8ce9b7.jpg" },
   { id:"p2",  name:"REAL MADRID 23/24 Winners Match Attax 24/25 Card",      category:"ma24-25", price:10,  img:"premro img/WhatsApp Image 2025-11-14 at 16.11.26_4f1110c5.jpg" },
   { id:"p3",  name:"BARELLA Match Attax 24/25 Card",                        category:"ma24-25", price:10,  img:"premro img/67.jpg" },
+/*
   { id:"p4",  name:"GVARDIO Match Attax 24/25 Card",                        category:"ma24-25", price:10,  img:"premro img/1.jpeg" },
   { id:"p5",  name:"BRADLEY Match Attax 24/25 Card",                        category:"ma24-25", price:5,   img:"premro img/78.jpeg" },
   { id:"p6",  name:"BAYER 04 LEVERKUSEN Match Attax 24/25 Card",            category:"ma24-25", price:5,   img:"premro img/88.jpg" },
   { id:"p7",  name:"KARIM ADEYEMI Match Attax 24/25 Card",                  category:"ma24-25", price:5,   img:"premro img/10.jpeg" },
+  */
   { id:"p8",  name:"vfb stuttgart Match Attax 24/25 Card",                  category:"ma24-25", price:5,   img:"premro img/00.jpg" },
+  { id:"p9",  name:"Mpapa Black Edge Edition Match Attax 24/25 Card",       category:"ma24-25", price:475, img:"premro img/m.jpeg" },
+  { id:"p10", name:"Kane World class limted Edition Match Attax 24/25 Card", category:"ma24-25", price:150, img:"premro img/k.jpeg" },
+  { id:"p11", name:"Sane Black Edge Edition Match Attax 24/25 Card",       category:"ma24-25", price:100, img:"premro img/s foront.jpeg" },
+  { id:"p12", name:"Ibrhiam diaz Man Of The Match Match Attax 24/25 Card",  category:"ma24-25", price:10,  img:"premro img/d.jpeg" },
   /*
   { id:"p17", name:"RODRYGO World WORLD FOOTBALL STARS",                    category:"stars",   price:10,  img:"premro img/55.jpg" },
   { id:"p18", name:"RONALDO World WORLD FOOTBALL STARS",                    category:"stars",   price:15,  img:"premro img/333.jpg" },
   { id:"p19", name:"Jude Bellingham World WORLD FOOTBALL STARS",            category:"stars",   price:10,  img:"premro img/33.jpg" },
   { id:"p20", name:"Laprta World WORLD FOOTBALL STARS",                     category:"stars",   price:5,   img:"premro img/555.jpg" },
-   */
+  
   { id:"p22", name:"Ousmane Dembele Counter Attax Match Attax 25/26 Card",   category:"ma25-26", price:50,  img:"premro img/45.jpg" },
   { id:"p23", name:"Cody Gakpo Stealth Strike Match Attax 25/26 Card",       category:"ma25-26", price:50,  img:"premro img/95.jpeg" },
   { id:"p24", name:"Alphonso Davies Man Of The Match Wildcard 25/26 Card",   category:"ma25-26", price:50,  img:"premro img/14.jpeg" },
+ */
   { id:"p25", name:"Alessandro Buongiorno Tops Heritage Special 25/26 Card", category:"ma25-26", price:35,  img:"premro img/236.jpeg" },
   { id:"p26", name:"Nuno Mendes Match Attax 25/26 Card",                    category:"ma25-26", price:15,  img:"premro img/788.jpeg" },
+  /*
   { id:"p27", name:"Ferran Torres Match Attax 25/26 Card",                  category:"ma25-26", price:15,  img:"premro img/777.jpeg" },
+*/
   { id:"p28", name:"Endrick Match Attax 25/26 Card",                        category:"ma25-26", price:15,  img:"premro img/24.jpeg" },
-  { id:"p29", name:"Gabriel Martinell Match Attax 25/26 Card",              category:"ma25-26", price:15,  img:"premro img/25.jpeg" },
+  { id:"p29", name:"Gabriel Martinell Match Attax 25/26 Card",               category:"ma25-26", price:15,  img:"premro img/25.jpeg" },
   { id:"p30", name:"Fc porto Match Attax 25/26 Card",                        category:"ma25-26", price:10,  img:"premro img/79.jpeg" },
+
+ /*
   { id:"p31", name:"rangers Match Attax 25/26 Card",                         category:"ma25-26", price:10,  img:"premro img/998.jpeg" },
   { id:"p32", name:"joao palhinha Match Attax 25/26 Card",                  category:"ma25-26", price:10,  img:"premro img/9898.jpeg" },
+ */
   { id:"p33", name:"rasmus kriistensen Match Attax 25/26 Card",              category:"ma25-26", price:10,  img:"premro img/71.jpeg" },
   { id:"p34", name:"omar marmoush Pl 25/26 Card",                           category:"pl25-26", price:30,  img:"premro img/996.webp" },
+ /*
   { id:"p35", name:"Amad Special Pl 25/26 Card",                             category:"pl25-26", price:30,  img:"premro img/7899.webp" },
+ */
   { id:"p36", name:"vitalii mykolenoko Full Force Pl 25/26 Card",           category:"pl25-26", price:30,  img:"premro img/78963.webp" },
   { id:"p37", name:"reece james Pl 25/26 Card",                             category:"pl25-26", price:20,  img:"premro img/78945.webp" },
   { id:"p38", name:"adma traore Pl 25/26 Card",                             category:"pl25-26", price:20,  img:"premro img/opik.png" },
@@ -145,16 +159,21 @@ const allCards = [
   { id:"p40", name:"milos kerkez Pl 25/26 Card",                             category:"pl25-26", price:15,  img:"premro img/hgtrd.webp" },
   { id:"p41", name:"MORGAN GIBBS WHITE Pl 25/26 Card",                      category:"pl25-26", price:15,  img:"premro img/9669.png" },
   { id:"p42", name:"WEST HAM UNITED Pl 25/26 Card",                         category:"pl25-26", price:10,  img:"premro img/752.jfif" },
+ /*
   { id:"p44", name:"Alison Hero Wc 2026 Card",                              category:"wc2026",  price:30,  img:"premro img/0.005.jpeg" },
   { id:"p45", name:"Reijnders Hero Wc 2026 Card",                           category:"wc2026",  price:10,  img:"premro img/-----l.jpeg" },
+ */ 
   { id:"p46", name:"lawrence ati zigi Wc 2026 Card",                        category:"wc2026",  price:10,  img:"premro img/abc.jpeg" },
   { id:"p47", name:"Luis Suarez Hero Wc 2026 Card",                         category:"wc2026",  price:10,  img:"premro img/412.jpeg" },
   { id:"p48", name:"Rasmus Hojlund Contender Wc 2026 Card",                 category:"wc2026",  price:10,  img:"premro img/-=m.jpeg" },
+  /*
   { id:"p49", name:"Sadiod Mane Icon Wc 2026 Card",                         category:"wc2026",  price:20,  img:"premro img/00000.jpeg" },
-  { id:"p50", name:"Mac Allister Hero Wc 2026 Card",                        category:"wc2026",  price:15,  img:"premro img/789+..jpeg" },
-  { id:"p51", name:"Omar Marmoush GOAL MACHINE Wc 2026 Card",               category:"wc2026",  price:40,  img:"premro img/098.jpeg" }
+ */
+ { id:"p50", name:"Mac Allister Hero Wc 2026 Card",                        category:"wc2026",  price:15,  img:"premro img/789+..jpeg" },
+  /*
+ { id:"p51", name:"Omar Marmoush GOAL MACHINE Wc 2026 Card",               category:"wc2026",  price:40,  img:"premro img/098.jpeg" }
+*/
 ];
-
 const categories = [
   { key:"all",       label:"All Cards" },
   { key:"ma24-25",   label:"Match Attax 24/25" },

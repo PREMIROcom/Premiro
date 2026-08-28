@@ -14,10 +14,9 @@
            ========================================================== */
 
         const PRODUCT_ID = "product60";   /* 🔵 CHANGE THIS for next product */
-        const PRODUCT_NAME = "ARSENAL Biger size 2026/2027 FOOTBALL SHIRT";  /* 🔵 CHANGE THIS */
+        const PRODUCT_NAME = "Barcelona 2026/2027 FOOTBALL SHIRT";  /* 🔵 CHANGE THIS */
         const PRODUCT_PRICE = 280;      /* 🔵 CHANGE THIS */
-        const inStock = false
-            ;         /* 🔵 true = in stock | false = sold out (pre-order) */
+        const inStock = false;         /* 🔵 true = in stock | false = sold out (pre-order) */
 
         /* ==========================================================
            DO NOT CHANGE ANYTHING BELOW THIS LINE
@@ -32,8 +31,8 @@
     <h3 id="price"></h3>
 
     <!-- 🔵 CHANGE YOUR IMAGE LINKS ONLY -->
-    <img id="img1" class="product-img" src="premro img/XAQ.jpeg">
-    <img id="img2" class="product-img" src="premro img/47.jpeg">
+    <img id="img1" class="product-img" src="premro img/df.jpeg">
+    <img id="img2" class="product-img" src="premro img/lon.jpeg">
 
     <!-- Image Switcher -->
     <div style="margin-top:10px;">
@@ -43,19 +42,19 @@
     
     <div style="margin-top:10px">
         <button onclick="window.location.href='product59.html'" class="switcher">⬅ Previous product</button>
-<!--
-        <button onclick="window.location.href='product60.html'" class="switcher">Next product ➡ </button>
-        -->
+
+        <button onclick="window.location.href='product61.html'" class="switcher">Next product ➡ </button>
+    
     </div>
 
 
     <div class="size-selection">
     <h4>Select Size:</h4>
     <div class="size-options">
-        <button type="button" class="size-btn" onclick="selectSize(this, '3X L')">3X L</button>
-        <button type="button" class="size-btn" onclick="selectSize(this, '4X L')">4X L</button>
-        <button type="button" class="size-btn" onclick="selectSize(this, '5X L')">5X L</button>
-        <button type="button" class="size-btn" onclick="selectSize(this, '6X L')">6X L</button>
+        <button type="button" class="size-btn" onclick="selectSize(this, 'M')">M</button>
+        <button type="button" class="size-btn" onclick="selectSize(this, ' L')">L</button>
+        <button type="button" class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
+        <button type="button" class="size-btn" onclick="selectSize(this, 'XXL')">XXL</button>
     </div>
     <input type="hidden" id="selectedSize" value="">
 </div>
